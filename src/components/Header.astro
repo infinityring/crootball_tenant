@@ -1,0 +1,67 @@
+---
+import {
+  SignedIn,
+  SignedOut,
+  UserButton,
+  SignInButton,
+} from "@clerk/astro/components";
+import Logo from "@/components/common/Logo.astro";
+import DarkModeButton from "@/components/common/DarkModeButton.astro";
+
+const { nologo } = Astro.props;
+const user = Astro.locals.user;
+
+let redirectTenant = null;
+
+---
+
+<nav class="header print:hidden" class:list={[nologo && "border-transparent!"]}>
+  <!-- App Header  -->
+  <div
+    class="flex items-center justify-center sticky top-0 z-50 w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 print:hidden"
+  >
+    <!-- Header Items -->
+    <div
+      class="flex w-full px-[var(--margin-x)] items-center justify-between my-8"
+    >
+      {nologo ? <div /> : <Logo />}
+
+      <div class="flex items-center space-x-2">
+        {
+          redirectTenant && (
+            <a
+              href={"/" + user}
+              class="w-6 h-6"
+            >
+              <span class="material-icons text-slate-800 dark:text-navy-100">
+                dashboard
+              </span>
+            </a>
+          )
+        }
+        <DarkModeButton />
+        {
+          user && !redirectTenant && (
+        <a href={`/${user.slug}/join`} class="btn size-8 w-24 rounded-full px-2 bg-black text-white dark:bg-white dark:text-black">
+          Join!
+        </a>
+        )
+        }
+        <SignedOut>
+          <SignInButton
+            mode="modal"
+            forceRedirectUrl={"/"}
+            class="monochrome-toggle btn size-8 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25"
+          >
+            <span class="material-icons text-slate-800 dark:text-navy-100"
+              >account_circle</span
+            >
+          </SignInButton>
+        </SignedOut>
+        <SignedIn>
+          <UserButton />
+        </SignedIn>
+      </div>
+    </div>
+  </div>
+</nav>

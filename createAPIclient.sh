@@ -1,0 +1,1 @@
+npx @hey-api/openapi-ts -i http://localhost:3000/api/reference/openapi.json -o ./src/client -c @hey-api/client-fetch
