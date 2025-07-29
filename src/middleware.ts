@@ -46,11 +46,8 @@ const sessionManager: MiddlewareHandler = async (context, next) => {
   context.locals.log.trace("Clerk User: " + userId);
 
   if (TEST) {
-    let response = await crootballClient.usersGetById({ path: { id: 1 } })
-    context.locals.user = response.data
     return next();
   }
-
   let response = await crootballClient.usersGetByIdentity({ path: { identityId: userId } })
   
   if (response.error) {
@@ -118,9 +115,27 @@ const crootball: MiddlewareHandler = async (context, next) => {
 };
 
 const dummySecurity: MiddlewareHandler = async (context, next) => {
+
+  context.locals.log.warn("*** TEST MODE ***");
+
+  const TEST_USER_ID  = 3
+  const testUser =  await crootballClient.usersGetById({ path: { id: TEST_USER_ID } })
+
+  const user = {
+    id: testUser.data?.id,
+    name: testUser.data?.name,
+    email: testUser.data?.email,
+    role: testUser.data?.role,
+    slug: testUser.data?.slug,
+    identityId: testUser.data?.identityId,
+    configuration: testUser.data?.configuration,
+  }
+
+  context.locals.user = user
+  context.locals.userId = TEST_USER_ID
   context.locals.auth = () => {
     return {
-      userId: 1
+      userId: TEST_USER_ID,
     }
   }
   return next();

@@ -12,9 +12,19 @@ const CONTENT_BASE_URL = import.meta.env.CONTENT_BASE_URL
 ---
 <Layout navigation="horizontal">
   <div id="root" class="cloak flex flex-col items-center w-full bg-white dark:bg-black">
-    <Header nologo={true}/>
+    <Header nologo={false}/>
     <main class="main-content w-full px-[var(--margin-x)] pb-8">
       
+
+
+
+
+
+
+
+
+
+
       <div class="flex flex-col items-center justify-center w-full h-v mt-10"> 
         <div class="avatar size-8">
           <img
@@ -25,7 +35,7 @@ const CONTENT_BASE_URL = import.meta.env.CONTENT_BASE_URL
         </div>
       
         <h1>{tenantName}</h1>
-        <div><span>User</span><span>{user}</span></div>
+        <div><span>User</span><span>{user.name}</span></div>
         <div><span>configuration</span><span>{JSON.stringify(tenant.configuration)}</span></div>
 
       </div>
