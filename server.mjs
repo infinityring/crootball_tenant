@@ -14,6 +14,6 @@ await app
     root: fileURLToPath(new URL('./dist/client', import.meta.url)),
   })
   .register(fastifyMiddie);
-app.use(ssrHandler);
+await app.use(ssrHandler);
 
-app.listen({ port: process.env.PORT || 4321, host: process.env.HOST || '0.0.0.0' });
+await app.listen({ port: process.env.PORT || 4321, host: process.env.HOST || '0.0.0.0' });

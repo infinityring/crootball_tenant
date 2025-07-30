@@ -13,7 +13,7 @@ export default defineConfig({
   },
 
   integrations: [alpinejs(),clerk()],
-  adapter: node({ mode: "standalone" }),
+  adapter: node({ mode: "middleware" }),
   i18n: {
     locales: ["es", "en", "it"],
     defaultLocale: "en",
