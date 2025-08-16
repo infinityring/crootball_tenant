@@ -1,0 +1,25 @@
+---
+import Badge from "@/components/prizes/Badge.astro";
+import Card from "@/components/ui/Card.astro";
+
+
+const prizes = [
+    { season : 25, prize : "HOPE_WINNER" },
+    { season : 25, prize : "CHAMPIONS_LEAGUE_WINNER" },
+    { season : 25, prize : "GOLDEN_BOOT" },
+]
+---
+
+<Card>
+    <h2>Hall Of Fame</h2>
+    <div class="flex flex-col space-y-2">
+        {
+            prizes.map((prize) => (
+                <Badge
+                    prize={prize.prize}
+                    season={prize.season}
+                />
+            ))
+        }
+    </div>
+</Card>

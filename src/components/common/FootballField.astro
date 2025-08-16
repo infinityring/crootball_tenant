@@ -1,0 +1,104 @@
+---
+import formatNumber from "@/lib/formatNumbers";
+
+const positionSettings = [
+    { position: "" },
+    { position: "GK" },
+    { position: "" },
+
+    { position: "RB" },
+    { position: "CB" },
+    { position: "LB" },
+
+    { position: "" },
+    { position: "DMF" },
+    { position: "" },
+
+    { position: "RMF" },
+    { position: "CMF" },
+    { position: "LMF" },
+
+    { position: "" },
+    { position: "AMF" },
+    { position: "" },
+
+    { position: "RWF" },
+    { position: "SS" },
+    { position: "LWF" },
+
+    { position: "" },
+    { position: "ST" },
+    { position: "" },
+];
+
+
+
+const pins = Astro.props.pins;
+
+---
+
+<div
+    class="w-[200px] sm:w-[260px] aspect-[3/4] relative rounded-lg border border-emerald-900 shadow-lg overflow-hidden"
+>
+    {/* pitch stripes */}
+    <div
+        class="absolute inset-0"
+        style="background-image: repeating-linear-gradient(0deg, #0f4d2a 0 28px, #146c3c 28px 56px);"
+    >
+    </div>
+
+    {/* outer margin line */}
+    <div class="absolute inset-1 rounded-md ring-2 ring-emerald-200/70"></div>
+
+    {/* center circle */}
+    <div
+        class="absolute inset-0 flex items-center justify-center pointer-events-none"
+    >
+        <div class="w-28 h-28 rounded-full ring-2 ring-emerald-200/80"></div>
+    </div>
+
+    {/* midline */}
+    <div
+        class="absolute inset-x-2 top-1/2 -translate-y-1/2 h-[2px] bg-emerald-200/80"
+    >
+    </div>
+
+    {/* penalty boxes */}
+    <div
+        class="absolute left-1/2 -translate-x-1/2 top-2 w-32 h-16 rounded-b-lg ring-2 ring-emerald-200/80"
+    >
+    </div>
+    <div
+        class="absolute left-1/2 -translate-x-1/2 bottom-2 w-32 h-16 rounded-t-lg ring-2 ring-emerald-200/80"
+    >
+    </div>
+
+    {/* small goal boxes */}
+    <div
+        class="absolute left-1/2 -translate-x-1/2 top-2.5 w-20 h-8 rounded-b-md ring-2 ring-emerald-200/80 bg-black/40"
+    >
+    </div>
+    <div
+        class="absolute left-1/2 -translate-x-1/2 bottom-2.5 w-20 h-8 rounded-t-md ring-2 ring-emerald-200/80 bg-black/40"
+    >
+    </div>
+
+    {/* rating chips */}
+    <div class="absolute inset-2 grid grid-flow-row grid-cols-3 gap-2">
+        {
+            positionSettings.map((p, index) => (
+                <div class="relative flex items-center justify-center">
+                    {p.position! + "" && (
+                        <span class="text-[10px] px-1 rounded-sm bg-black/70 text-yellow-300 font-semibold tracking-wide">
+                            {
+                                pins.find(
+                                    (pin) => pin.label === p.position,
+                                )?.value
+                            }
+                        </span>
+                    )}
+                </div>
+            ))
+        }
+    </div>
+</div>

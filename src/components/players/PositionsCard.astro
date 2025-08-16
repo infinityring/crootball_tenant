@@ -1,0 +1,177 @@
+---
+import Card from "../ui/Card.astro";
+import TableRow from "../ui/TableRow.astro";
+import TableBodyCell from "../ui/TableBodyCell.astro";
+import Table from "../ui/Table.astro";
+
+
+
+/* src/components/PitchRatings.astro
+export interface RatingPin {
+  label: string; // e.g. "LB"
+  value: number;
+  col: 1 | 2 | 3; // grid column
+  row: 1 | 2 | 3 | 4 | 5 | 6; // grid row (top->bottom)
+}
+*/
+
+const positionSettings = [
+  { position: "" },
+  { position: "GK" },
+  { position: "" },
+
+  { position: "RB" },
+  { position: "CB" },
+  { position: "LB" },
+
+  { position: "" },
+  { position: "DMF" },
+  { position: "" },
+
+  { position: "RMF" },
+  { position: "CMF" },
+  { position: "LMF" },
+
+  { position: "" },
+  { position: "AMF" },
+  { position: "" },
+
+  { position: "RWF" },
+  { position: "SS" },
+  { position: "LWF" },
+
+  { position: "" },
+  { position: "ST" },
+  { position: "" },
+];
+
+const samplePins = [
+  { label: "GK", value: 60 },
+  { label: "CB", value: 77 },
+  { label: "LB", value: 84 },
+  { label: "RB", value: 78 },
+  { label: "DMF", value: 85 },
+  { label: "LMF", value: 78 },
+  { label: "CMF", value: 87 },
+  { label: "RMF", value: 78 },
+  { label: "AMF", value: 87 },
+  { label: "RWF", value: 86 },
+  { label: "LWF", value: 86 },
+  { label: "SS", value: 53 },
+  { label: "ST", value: 53 },
+];
+
+const pins = samplePins;
+
+// color by rating
+const chipClass = (n: number) => {
+  if (n >= 85) return "text-white bg-green-600";
+  if (n >= 75) return "text-black bg-yellow-400";
+  return "text-white bg-red-600";
+};
+---
+
+<Card>
+  <div class="grid grid-cols-2 gap-2">
+    <div
+      class="w-[200px] sm:w-[260px] aspect-[3/4] relative rounded-lg border border-emerald-900 shadow-lg overflow-hidden"
+    >
+      {/* pitch stripes */}
+      <div
+        class="absolute inset-0"
+        style="background-image: repeating-linear-gradient(0deg, #0f4d2a 0 28px, #146c3c 28px 56px);"
+      >
+      </div>
+
+      {/* outer margin line */}
+      <div class="absolute inset-1 rounded-md ring-2 ring-emerald-200/70"></div>
+
+      {/* center circle */}
+      <div
+        class="absolute inset-0 flex items-center justify-center pointer-events-none"
+      >
+        <div class="w-28 h-28 rounded-full ring-2 ring-emerald-200/80"></div>
+      </div>
+
+      {/* midline */}
+      <div
+        class="absolute inset-x-2 top-1/2 -translate-y-1/2 h-[2px] bg-emerald-200/80"
+      >
+      </div>
+
+      {/* penalty boxes */}
+      <div
+        class="absolute left-1/2 -translate-x-1/2 top-2 w-32 h-16 rounded-b-lg ring-2 ring-emerald-200/80"
+      >
+      </div>
+      <div
+        class="absolute left-1/2 -translate-x-1/2 bottom-2 w-32 h-16 rounded-t-lg ring-2 ring-emerald-200/80"
+      >
+      </div>
+
+      {/* small goal boxes */}
+      <div
+        class="absolute left-1/2 -translate-x-1/2 top-2.5 w-20 h-8 rounded-b-md ring-2 ring-emerald-200/80 bg-black/40"
+      >
+      </div>
+      <div
+        class="absolute left-1/2 -translate-x-1/2 bottom-2.5 w-20 h-8 rounded-t-md ring-2 ring-emerald-200/80 bg-black/40"
+      >
+      </div>
+
+      {/* rating chips */}
+      <div class="absolute inset-2 grid grid-flow-row grid-cols-3 gap-2">
+        {
+          positionSettings.map((p, index) => (
+            <div class="relative flex items-center justify-center">
+              {p.position! + "" && (
+                <span class="text-[10px] px-1 rounded-sm bg-black/70 text-yellow-300 font-semibold tracking-wide">
+                  {samplePins.find((pin) => pin.label === p.position)?.value}
+                </span>
+              )}
+            </div>
+          ))
+        }
+      </div>
+    </div>
+
+    <div>
+
+      <Table>
+        <tbody slot="body">
+          <TableRow>
+            <TableBodyCell><span class="font-bold">Cluster</span></TableBodyCell>
+            <TableBodyCell><span>Tall, fast striker</span></TableBodyCell>
+          </TableRow>
+          <TableRow>
+            <TableBodyCell colspan="2"><span class="font-bold">Key attributes</span></TableBodyCell>
+          </TableRow>
+          <TableRow>
+            <TableBodyCell><span class="font-bold">Speed</span></TableBodyCell>
+            <TableBodyCell><span>85</span></TableBodyCell>
+          </TableRow>
+          <TableRow>
+            <TableBodyCell><span class="font-bold">Acceleration</span></TableBodyCell>
+            <TableBodyCell><span>82</span></TableBodyCell>
+          </TableRow>
+          <TableRow>
+            <TableBodyCell><span class="font-bold">Hading </span></TableBodyCell>
+            <TableBodyCell><span>80</span></TableBodyCell>
+          </TableRow>
+          <TableRow>
+            <TableBodyCell><span class="font-bold">Physical Contact</span></TableBodyCell>
+            <TableBodyCell><span>85</span></TableBodyCell>
+          </TableRow>
+          <TableRow>
+            <TableBodyCell><span class="font-bold">Height</span></TableBodyCell>
+            <TableBodyCell><span>191</span></TableBodyCell>
+          </TableRow>
+          <TableRow>
+            <TableBodyCell><span class="font-bold">Skills</span></TableBodyCell>
+            <TableBodyCell><div class="badge bg-primary text-white">Heading</div></TableBodyCell>
+          </TableRow>
+        </tbody>
+      </Table>
+    </div>
+  </div>
+</Card>

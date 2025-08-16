@@ -1,0 +1,136 @@
+---
+import TenantUser from "@/layouts/TenantUser.astro";
+import SearchPanel from "@/components/ui/alpine/SearchPanel.astro";
+import SearchResults from "@/components/ui/alpine/SearchResults.astro";
+import Textbox from "@/components/ui/alpine/Textbox.astro";
+import Card from "@/components/ui/Card.astro";
+import Button from "@/components/ui/alpine/Button.astro";
+import TableHeaderCell from "@/components/ui/TableHeaderCell.astro";
+import TableBodyCell from "@/components/ui/TableBodyCell.astro";
+import TableRow from "@/components/ui/TableRow.astro";
+import Operations from "@/components/market/Operations.astro";
+
+const _team = {
+  name: "RCD Mallorca",
+  slug: "rcd-mallorca",
+};
+
+const _alpineParams = {};
+const _alpineModel = "marketSearch()";
+
+const events = {
+  doSearch: "marketSearch()",
+};
+---
+
+<script>
+  import formatNumber from "@/lib/formatNumbers";
+
+  window.marketSearch = (params) => {
+    return {
+      searchResults: [],
+      init() {
+        console.log("init");
+        for (let i = 0; i < 30; i++) {
+          this.searchResults.push({
+            operationId: i,
+            fromTeam: `Team ${i + 1}`,
+            toTeam: `Team ${i + 11}`,
+            player: `Player ${i + 1}`,
+            season: `Season ${i + 1}`,
+            value: formatNumber(Math.floor(Math.random() * 10000000)),
+          });
+        }
+      },
+
+      updateResults(event) {
+        const searchForm = event.detail;
+        this.searchResults = [];
+        for (let i = 0; i < 30; i++) {
+          this.searchResults.push({
+            operationId: i,
+            fromTeam: `Team ${i + 1}`,
+            toTeam: `Team ${i + 11}`,
+            player: `Player ${i + 1}`,
+            season: `Season ${i + 1}`,
+            value: formatNumber(Math.floor(Math.random() * 10000000)),
+          });
+        }
+      },
+
+      gotoOperation(id) {
+        window.location.href = `/market/transfers/${id}`;
+      },
+    };
+  };
+</script>
+
+<TenantUser>
+  <h1>Market</h1>
+  <Operations />
+  <Card>
+    <SearchPanel event="doSearch" data="searchFormData">
+      <Textbox
+        label="From Team"
+        model="searchFormData.fromTeam"
+        placeholder="Mallorca"
+      />
+      <Textbox
+        label="To Team"
+        model="searchFormData.toTeam"
+        placeholder="Barcelona"
+      />
+      <Textbox
+        label="Player"
+        model="searchFormData.player"
+        placeholder="Roony"
+      />
+      <Textbox
+        label="Season"
+        model="searchFormData.season"
+        placeholder="2025"
+      />
+      <Button label="Search" onClick="doSearch" />
+    </SearchPanel>
+
+    <SearchResults _alpineModel={_alpineModel}>
+      <thead slot="head">
+        <tr
+          class="border border-transparent border-b-slate-200 dark:border-b-navy-500"
+        >
+          <TableHeaderCell>#</TableHeaderCell>
+          <TableHeaderCell>From team</TableHeaderCell>
+          <TableHeaderCell>To Team</TableHeaderCell>
+          <TableHeaderCell>Player</TableHeaderCell>
+          <TableHeaderCell>Season</TableHeaderCell>
+          <TableHeaderCell>Value</TableHeaderCell>
+        </tr>
+      </thead>
+      <tbody slot="body">
+        <template x-for="(transfer, index) of searchResults">
+          <TableRow onClick="gotoOperation(transfer.operationId)">
+
+            <TableBodyCell>
+              <span x-text="transfer.operationId"></span>
+            </TableBodyCell>
+            <TableBodyCell>
+              <span x-text="transfer.fromTeam"></span>
+            </TableBodyCell>
+            <TableBodyCell>
+              <span x-text="transfer.toTeam"></span></td
+            >
+            <TableBodyCell>
+              <span x-text="transfer.player"></span>
+            </TableBodyCell> 
+            <TableBodyCell>
+              <span x-text="transfer.season"></span>
+            </TableBodyCell>
+            <TableBodyCell>
+              <span x-text="transfer.value"></span>
+            </TableBodyCell>
+          </TableRow>
+        </template>
+      </tbody>
+    </SearchResults>
+  </Card>
+</TenantUser>

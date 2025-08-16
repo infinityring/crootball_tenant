@@ -1,0 +1,41 @@
+---
+import AppPreloader from "@/components/common/AppPreloader.astro";
+import Fonts from "@/components/common/Fonts.astro";
+import "@/styles/global.css";
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <meta name="generator" content={Astro.generator} />
+        <title>Crootball</title>
+
+        <script src="../scripts/app.js"></script>
+        <script>
+            /**
+             * THIS SCRIPT REQUIRED FOR PREVENT FLICKERING IN SOME BROWSERS
+             */
+            localStorage.getItem("dark-mode") === "dark" &&
+                document.documentElement.classList.add("dark");
+        </script>
+
+        <Fonts />
+    </head>
+    <body class="is-header-blur">
+        <AppPreloader />
+        <slot />
+    </body>
+    <div id="x-teleport-target"></div>
+</html>
+
+<style>
+    html,
+    body {
+        margin: 0;
+        width: 100%;
+        height: 100%;
+    }
+</style>

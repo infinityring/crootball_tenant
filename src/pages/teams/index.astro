@@ -1,0 +1,126 @@
+---
+import TenantUser from "@/layouts/TenantUser.astro";
+import SearchPanel from "@/components/ui/alpine/SearchPanel.astro";
+import SearchResults from "@/components/ui/alpine/SearchResults.astro";
+import Textbox from "@/components/ui/alpine/Textbox.astro";
+import Card from "@/components/ui/Card.astro";
+import Button from "@/components/ui/alpine/Button.astro";
+import TableHeaderCell from "@/components/ui/TableHeaderCell.astro";
+import TableBodyCell from "@/components/ui/TableBodyCell.astro";
+import TableRow from "@/components/ui/TableRow.astro";
+
+const _team = {
+  name: "RCD Mallorca",
+  slug: "rcd-mallorca",
+};
+
+const _alpineParams = {};
+const _alpineModel = "teamSearch()";
+
+const events = {
+  doSearch: "teamSearch()",
+};
+---
+
+<script>
+
+  import formatNumber from "@/lib/formatNumbers";
+
+  window.teamSearch = (params) => {
+    return {
+      searchResults: [],
+      init() {
+        console.log("init");
+        for (let i = 0; i < 30; i++) {
+          this.searchResults.push({
+            name: `Team ${i + 1}`,
+            slug: `Slug-${i + 1}`,
+            manager : `Manager-${i + 1}`,
+            balance : formatNumber(Math.floor(Math.random() * 10000000)),
+            newFaces : formatNumber(Math.floor(Math.random() * 5)),
+            uglies : formatNumber(Math.floor(Math.random() * 5)),
+            value : formatNumber(Math.floor(Math.random() * 10000000)),
+          });
+        }
+      },
+
+      updateResults(event) {
+        const searchForm = event.detail;
+        this.searchResults = [];
+        for (let i = 0; i < 30; i++) {
+          this.searchResults.push({
+            name: `Team ${i + 1}`,
+            slug: `Slug-${i + 1}`,
+            manager : `Manager-${i + 1}`,
+            balance : formatNumber(Math.floor(Math.random() * 10000000)),
+            newFaces : formatNumber(Math.floor(Math.random() * 5)),
+            uglies : formatNumber(Math.floor(Math.random() * 5)),
+            value : formatNumber(Math.floor(Math.random() * 10000000)),
+          });
+        }
+      },
+
+      gotoTeam(slug) {
+        window.location.href = `/teams/${slug}`;
+      },
+
+    };
+  };
+</script>
+
+<TenantUser>
+  <h1>Teams</h1>
+  <Card>
+    <SearchPanel event="doSearch">
+      <Textbox
+        label="Search"
+        model="searchFormData.sampleField"
+        placeholder="Search"
+      />
+      <Button label="Search" onClick="doSearch" />
+    </SearchPanel>
+
+    <SearchResults _alpineModel={_alpineModel}>
+      <thead slot="head">
+        <tr
+          class="border border-transparent border-b-slate-200 dark:border-b-navy-500"
+        >
+          <TableHeaderCell>#</TableHeaderCell>
+          <TableHeaderCell>Team Name</TableHeaderCell>
+          <TableHeaderCell>Manager</TableHeaderCell>
+          <TableHeaderCell>Balance</TableHeaderCell>
+          <TableHeaderCell>New Faces</TableHeaderCell>
+          <TableHeaderCell>Uglies</TableHeaderCell>
+          <TableHeaderCell>Value</TableHeaderCell>
+        </tr>
+      </thead>
+      <tbody slot="body">
+        <template x-for="(team, index) of searchResults">
+          <TableRow
+            onClick="gotoTeam(team.slug)"
+            class="border border-transparent border-b-slate-200 dark:border-b-navy-500"
+          >
+            <TableBodyCell
+              ><div class="avatar">
+                <img
+                  class="rounded-full"
+                  src="/images/200x200.png"
+                  alt="avatar"
+                />
+              </div></TableBodyCell
+            >
+            <TableBodyCell><span x-text="team.name"></span></TableBodyCell>
+            <TableBodyCell><span x-text="team.manager"></span></TableBodyCell>
+            <TableBodyCell><span x-text="team.balance"></span></TableBodyCell>
+            <TableBodyCell><span x-text="team.newFaces"></span></TableBodyCell>
+            <TableBodyCell><span x-text="team.uglies"></span></TableBodyCell>
+            <TableBodyCell><span x-text="team.value"></span></TableBodyCell>
+          </TableRow>
+        </template>
+            </td>
+          </tr>
+        </template>
+      </tbody>
+    </SearchResults>
+  </Card>
+</TenantUser>

@@ -1,0 +1,210 @@
+---
+import Card from "@/components/ui/Card.astro"
+import TenantTeam from "@/layouts/TenantTeam.astro"
+import Form from "@/components/ui/alpine/Form.astro"
+import Textbox from "@/components/ui/alpine/Textbox.astro"
+import Button from "@/components/ui/alpine/Button.astro"
+import Table from "@/components/ui/Table.astro"
+import TableHeaderCell from "@/components/ui/TableHeaderCell.astro"
+import TableBodyCell from "@/components/ui/TableBodyCell.astro"
+import TableRow from "@/components/ui/TableRow.astro"
+import PlayerCard from "@/components/players/SummaryCard.astro"
+import Kpi from "@/components/ui/Kpi.astro"
+
+const sampleClauses = [
+
+    { type : "money", description : "Money", value : "1000000", season : 23 },
+    { type : "exchange", description : "Player xyz", player : { name : "Player xyz", id : "123456"}, value : "1000000", season : 23 },
+    { type : "buyback", description : "Buy Back", value : "1000000", season : 23 },
+    { type : "resell_percentage", description : "Resell Percentage", value : "20%", season : 23 },
+    { type : "custom", description : "10 real apps", value : "1000000", season : 23 },
+
+]
+
+const player = {
+  name: "Player 1",
+  slug: "player-1",
+  attributes: {
+    age: 25,
+    height: 180,
+    weight: 80,
+    positionGroup: "MID",
+    position: "AMF",
+    role: "Creative Playmaker",
+    skills: ["OnetouchPass", "SoleControl", "LowLoftedPass"],
+    currentWage: 4000000,
+    expectedWage: 7000000,
+    value: 35000000,
+    marketValue: 25000000,
+    fatigue: 80,
+  },
+
+  lastMatches: [
+    {
+      homeTeam: "RCD Mallorca",
+      awayTeam: "Barcelona",
+      goals: 2,
+      yellowred: 0,
+      fatigue: 50,
+    },
+    {
+      homeTeam: "RCD Mallorca",
+      awayTeam: "Real Madrid",
+      goals: 1,
+      yellow: 1,
+      red: 0,
+      fatigue: 60,
+    },
+    {
+      homeTeam: "Athletic Bilbao",
+      awayTeam: "RCD Mallorca",
+      goals: 0,
+      yellow: 0,
+      red: 1,
+      fatigue: 70,
+    },
+    {
+      homeTeam: "Atletico Madrid",
+      awayTeam: "RCD Mallorca",
+      goals: 1,
+      yellowred: 0,
+      fatigue: 75,
+    },
+    {
+      homeTeam: "RCD Mallorca",
+      awayTeam: "Sevilla FC",
+      goals: 0,
+      yellow: 0,
+      red: 0,
+      fatigue: 80,
+    },
+  ],
+
+  stats: [
+    {
+      competition: "La Liga",
+      season: "2024-2025",
+      apps: 0,
+      goals: 0,
+      yellow: 0,
+      red: 0,
+    },
+    {
+      competition: "Copa  Del Rey",
+      season: "2024-2025",
+      apps: 0,
+      goals: 0,
+      yellow: 0,
+      red: 0,
+    },
+    {
+      competition: "Europa League",
+      season: "2024-2025",
+      apps: 0,
+      goals: 0,
+      yellow: 0,
+      red: 0,
+    },
+    {
+      competition: "Career",
+      season: "-",
+      apps: 0,
+      goals: 0,
+      yellow: 0,
+      red: 0,
+    },
+  ],
+
+  transfers: [
+    {
+      transferMoney: 30000000,
+      estimatedValue: 25000000,
+      wage: 10000000,
+      transferType: "PRS",
+      season: "2024-2025",
+      toTeam: "RCD Mallorca",
+    },
+    {
+      transferMoney: 35000000,
+      estimatedValue: 30000000,
+      wage: 12000000,
+      transferType: "TRS",
+      season: "2025-2026",
+      toTeam: "Real Madrid",
+    },
+    {
+      transferMoney: 40000000,
+      estimatedValue: 35000000,
+      wage: 15000000,
+      transferType: "PRO",
+      season: "2026-2027",
+      toTeam: "Atletico Madrid",
+    },
+  ],
+};
+
+
+---
+
+<TenantTeam>
+    <h1>Transfer Player</h1>
+    <div class="flex flex-col space-y-4 w-4xl mx-auto">
+    <Card>
+        <Form event="submit">
+            <div class="flex flex-col space-y-4">
+            <Textbox
+                label="TM Code"
+                model="searchFormData.player"
+                placeholder="Player"
+            />
+            <Textbox
+                label="PESDB Code"
+                model="searchFormData.player"
+                placeholder="Player"
+            />
+
+            <PlayerCard player={player} />
+
+
+            <Button label="Add Clauses" />
+
+            <Table>
+                <thead slot="head">
+                  <TableHeaderCell>Clause</TableHeaderCell>
+                  <TableHeaderCell>Description</TableHeaderCell>
+                  <TableHeaderCell>Player</TableHeaderCell>
+                  <TableHeaderCell>Value</TableHeaderCell>
+                  <TableHeaderCell>Action</TableHeaderCell>
+                </thead>
+                <tbody slot="body">
+                  {
+                    sampleClauses.map((clause) => (
+                      <TableRow>
+                        <TableBodyCell>{clause.type}</TableBodyCell>
+                        <TableBodyCell>{clause.description}</TableBodyCell>
+                        <TableBodyCell>{clause.player ? clause.player.name : "-"}</TableBodyCell>
+                        <TableBodyCell>{clause.value}</TableBodyCell>
+                        <TableBodyCell><Button label="Remove" /></TableBodyCell>
+                      </TableRow>
+                    ))
+                  }
+                </tbody>
+            </Table>
+            
+            <Card>
+                <h2>Resume</h2>
+                <div class="grid grid-cols-4 gap-4">
+                <Kpi kpi={{label : 'Total Value Out', topvalue : '1000000'}} />
+                <Kpi kpi={{label : 'Total Value In', topvalue : '1000000'}} />
+                <Kpi kpi={{label : 'Operation Balance', topvalue : '1000000'}} />
+                <Kpi kpi={{label : 'Manager Points', topvalue : '-100'}} />
+                </div>
+            </Card>
+        
+            <Button label="Offer" />
+            </div>
+        </Form>
+
+    </Card>
+    </div>
+</TenantTeam>

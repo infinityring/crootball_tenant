@@ -1,0 +1,8 @@
+---
+
+const { onClick } = Astro.props;
+---
+
+<tr x-on:click={onClick} class="border border-transparent border-b-slate-200 dark:border-b-navy-500">
+    <slot/>
+</tr>

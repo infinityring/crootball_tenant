@@ -1,0 +1,68 @@
+---
+import formatNumber from "@/lib/formatNumbers";
+import Card from "@/components/ui/Card.astro";
+import Kpi from "@/components/ui/Kpi.astro";
+
+const teamResume = {
+    name: "RCD Mallorca",
+    slug: "rcd-mallorca",
+    attributes: {
+        balance: 720000000,
+        wages: 1200000,
+        teamValue: 1340000000,
+        vg11: 83.33,
+        vg11Value: 1200000,
+        numberPlayers: 27,
+        newFaces: 5,
+        free: 5,
+        uglies: 5,
+    },
+    badges: [
+        { label: "Balance Ok", color: "error" },
+        { label: "NewFaces Ok", color: "error" },
+        { label: "Uglies Ok", color: "error" },
+    ],
+};
+
+const resumeConfiguration = {
+    bigNumber: { label: "Balance", field: "balance" },
+    kpis: [
+        { label: "Wages", field: "wages" },
+        { label: "Team Value", field: "teamValue" },
+        { label: "VG11", field: "vg11" },
+        { label: "VG11 Value", field: "vg11Value" },
+        { label: "Number of Players", field: "numberPlayers" },
+        { label: "New Faces", field: "newFaces" },
+        { label: "Free", field: "free" },
+        { label: "Uglies", field: "uglies" },
+    ],
+};
+---
+
+<Card>
+    <h2>{teamResume.name}</h2>
+    <div class="grid grid-cols-4 gap-1">
+        {
+            resumeConfiguration.kpis.map((kpi) => (
+                <Kpi
+                    kpi={{
+                        topvalue: formatNumber(
+                            teamResume.attributes[kpi.field],
+                        ),
+                        label: kpi.label,
+                        link: `/teams/${teamResume.slug}`,
+                    }}
+                />
+            ))
+        }
+    </div>
+    <div class="flex items-center justify-center space-x-2 mt-4">
+        {
+            teamResume.badges.map((badge) => (
+                <div class={`badge bg-primary text-white`}>
+                   {badge.label}
+                </div>
+            ))
+        }
+    </div>
+</Card>

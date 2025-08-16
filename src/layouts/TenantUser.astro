@@ -1,0 +1,31 @@
+---
+import LineMenu from "@/components/common/LineMenu.astro";
+import getUserMenu from "@/lib/getUserMenu";
+import Tenant from "./Tenant.astro";
+import Header from "@/components/Header.astro";
+
+const { title, alpineModel } = Astro.props || { title: "Undefined Title" };
+
+const tenant = Astro.locals.tenant;
+const user = Astro.locals.user
+
+const userMenu = getUserMenu({ context: Astro.locals, user: user });
+---
+
+<Tenant>
+    <div
+        id="root"
+        class="flex flex-col items-center w-full bg-white dark:bg-black"
+        x-data={alpineModel}
+    >
+        <Header />
+        <main class="main-content w-full px-[var(--margin-x)] pb-8">
+            <div
+                class="flex flex-col items-center justify-center w-full h-v mt-10"
+            >
+                <LineMenu menu={userMenu} />
+                <slot />
+            </div>
+        </main>
+    </div>
+</Tenant>

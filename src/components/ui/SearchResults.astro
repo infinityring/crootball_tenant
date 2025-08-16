@@ -1,0 +1,10 @@
+---
+import Card from "@/components/ui/Card.astro";
+const event = Astro.props.event;
+---
+<div class="is-scrollbar-hidden min-w-full overflow-x-auto">
+    <table class="w-full text-left">
+      <slot name="head" />
+      <slot name="body" />
+    </table>
+  </div>

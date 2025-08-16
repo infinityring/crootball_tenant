@@ -1,0 +1,23 @@
+---
+import TenantTeam from "@/layouts/TenantTeam.astro"
+import TenantUser from "@/layouts/TenantUser.astro"
+
+const availableOperations = [
+    { label : "Transfer Player", link: `/operations/transferPlayer`},
+    { label : "Transfer List", link: `/operations/transferList`},
+    { label : "Renew Contract", link: `/operations/renewContract`},
+    { label : "Terminate Contract", link: `/operations/terminateContract`},
+    { label : "Hire Staff", link: `/operations/hireStaff`},
+    { label : "Auctions", link: `/operations/auctions`},
+    { label : "Draft", link: `/operations/draft`}
+]
+---
+
+<TenantTeam>
+    <h1>Operations</h1>
+    <div class="flex flex-col space-y-4">
+        {availableOperations.map((operation) => (
+            <a class="btn bg-primary text-white" href={operation.link}>{operation.label}</a>
+        ))}
+    </div>
+</TenantTeam>

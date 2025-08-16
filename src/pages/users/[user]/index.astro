@@ -1,0 +1,29 @@
+---
+import TenantUser from "@/layouts/TenantUser.astro";
+import JoinToTeam from "@/components/users//JoinTeamCard.astro";
+import ResumeCard from "@/components/teams/ResumeCard.astro";
+import MatchesCard from "@/components/matches/MatchesCard.astro";
+import CompetitionsCard from "@/components/rankings/CompetitionsCard.astro";
+import Operations from "@/components/users/Operations.astro";
+import UserResume from "@/components/users/ResumeCard.astro";
+import PointsCard from "@/components/users/PointsCard.astro";
+
+const tenant = Astro.locals.tenant;
+const user = Astro.locals.user
+const team = Astro.locals.team
+
+
+---
+<TenantUser>
+    <h1>{user.name}</h1>
+
+    <div class="flex flex-col space-y-4">
+        <Operations></Operations>
+        <UserResume></UserResume>
+        <ResumeCard></ResumeCard>
+        {!team ? <JoinToTeam></JoinToTeam> : <ResumeCard></ResumeCard>}
+        <CompetitionsCard></CompetitionsCard>
+        <MatchesCard></MatchesCard>
+        <PointsCard></PointsCard>
+    </div>
+</TenantUser>

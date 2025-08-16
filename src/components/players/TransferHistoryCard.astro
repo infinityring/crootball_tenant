@@ -1,0 +1,44 @@
+---
+import Card from "@/components/ui/Card.astro";
+import Table from "@/components/ui/Table.astro";
+import TableHeaderCell from "@/components/ui/TableHeaderCell.astro";
+import TableBodyCell from "@/components/ui/TableBodyCell.astro";
+import TableRow from "@/components/ui/TableRow.astro";          
+import formatNumber from "@/lib/formatNumbers";
+
+interface Props {
+    player: Player;
+}
+
+const { player } = Astro.props;
+
+---
+
+<Card>
+    <h3>Transfer History</h3>
+    <Table>
+        <thead slot="head">
+            <TableHeaderCell>Season</TableHeaderCell>
+            <TableHeaderCell>From Team</TableHeaderCell>
+            <TableHeaderCell>To Team</TableHeaderCell>
+            <TableHeaderCell>Value</TableHeaderCell>
+        </thead>
+        <tbody slot="body">
+            {
+                player.transfers.map((transfer) => (
+                    <TableRow>
+                        <TableBodyCell>{transfer.season}</TableBodyCell>
+                        <TableBodyCell>{transfer.toTeam}</TableBodyCell>
+                        <TableBodyCell>{transfer.transferType}</TableBodyCell>
+                        <TableBodyCell>
+                            {formatNumber(transfer.transferMoney)}
+                        </TableBodyCell>
+                        <TableBodyCell>
+                            {formatNumber(transfer.estimatedValue)}
+                        </TableBodyCell>
+                    </TableRow>
+                ))
+            }
+        </tbody>
+    </Table>
+</Card>

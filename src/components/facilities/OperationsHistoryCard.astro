@@ -1,0 +1,69 @@
+---
+import Card from "@/components/ui/Card.astro";
+import Table from "@/components/ui/Table.astro";
+import TableHeaderCell from "@/components/ui/TableHeaderCell.astro";
+import TableRow from "@/components/ui/TableRow.astro";
+import TableBodyCell from "@/components/ui/TableBodyCell.astro";
+
+const facilitiesTransactionsHistory = [
+    {
+        id: 1,
+        type: "STADIUM_EXTENSION",
+        description: "Stadium extension by 5000 seats",
+        direction: "OUT",
+        value: -2000000,
+        season: 24
+    },
+    {
+        id: 2,
+        type: "HIRE",
+        description: "Hire Coach",
+        direction: "OUT",
+        value: -500000,
+        season: 24
+    },
+    {
+        id: 3,
+        type: "HIRE",
+        description: "Hire Marketing Staff",
+        direction: "OUT",
+        value: -300000,
+        season: 25
+    },
+    {
+        id: 4,
+        type: "STADIUM_EXTENSION",
+        description: "New stadium extension by 5000 seats",
+        direction: "OUT",
+        value: -2200000,
+        season: 26
+    }
+];
+---
+
+<Card>
+    <h2>Operations History</h2>
+    <Table>
+        <thead slot="head">
+            <TableHeaderCell>Season</TableHeaderCell>
+            <TableHeaderCell>Type</TableHeaderCell>
+            <TableHeaderCell>Description</TableHeaderCell>
+            <TableHeaderCell>In/Out</TableHeaderCell>
+            <TableHeaderCell>Value</TableHeaderCell>
+        </thead>
+
+        <tbody slot="body">
+            {
+                facilitiesTransactionsHistory.map((operation) => (
+                    <TableRow>
+                        <TableBodyCell>{operation.season}</TableBodyCell>
+                        <TableBodyCell>{operation.type}</TableBodyCell>
+                        <TableBodyCell>{operation.description}</TableBodyCell>
+                        <TableBodyCell>{operation.direction}</TableBodyCell>
+                        <TableBodyCell>{operation.value}</TableBodyCell>
+                    </TableRow>
+                ))
+            }
+        </tbody>
+    </Table>
+</Card>

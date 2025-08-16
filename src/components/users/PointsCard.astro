@@ -1,0 +1,56 @@
+---
+import formatNumber from "@/lib/formatNumbers";
+import Card from "@/components/ui/Card.astro";
+import Kpi from "@/components/ui/Kpi.astro";
+import Table from "@/components/ui/Table.astro";
+import TableHeaderCell from "@/components/ui/TableHeaderCell.astro";
+import TableRow from "@/components/ui/TableRow.astro";
+import TableBodyCell from "@/components/ui/TableBodyCell.astro";
+
+const userPoints = [
+    [
+    { date: "2025-01-01", season: 23, badge: { type: "league winner" }, points: 100, type: "badge" },
+    { date: "2025-01-02", season: 23, prize: { type: "league winner" }, points: 100, type: "prize" },
+    { date: "2025-01-03", season: 23, prize: { type: "forfait" }, points: -300, type: "prize" },
+    { date: "2025-02-01", season: 24, market: { type: "Sell player > 10M" }, points: 100, type: "market" },
+    { date: "2025-02-02", season: 24, market: { type: "Sell player < 10M" }, points: -100, type: "market" },
+    { date: "2025-02-10", season: 24, event: { type: "played match", opponent: "Team Alpha", result: "win" }, points: 50, type: "event" },
+    { date: "2025-02-17", season: 24, event: { type: "played match", opponent: "Team Beta", result: "loss" }, points: 0, type: "event" },
+    { date: "2025-02-24", season: 24, event: { type: "played match", opponent: "Team Gamma", result: "draw" }, points: 10, type: "event" },
+]
+
+
+]
+---
+
+<Card>
+    <h2>Points History</h2>
+<Table>
+    <thead slot="head">
+        <TableHeaderCell>Date</TableHeaderCell>
+        <TableHeaderCell>Season</TableHeaderCell>
+        <TableHeaderCell>Type</TableHeaderCell>
+        <TableHeaderCell>Description</TableHeaderCell>
+        <TableHeaderCell>Points</TableHeaderCell>
+    </thead>
+
+    <tbody slot="body">
+        {
+            userPoints[0].map((point) => (
+                <TableRow>
+                    <TableBodyCell>{point.date}</TableBodyCell>
+                    <TableBodyCell>{point.season}</TableBodyCell>
+                    <TableBodyCell>{point.type}</TableBodyCell>
+                    <TableBodyCell>
+                        {point.badge?.type ||
+                         point.prize?.type ||
+                         point.market?.type ||
+                         (point.event ? `${point.event.type} vs ${point.event.opponent} (${point.event.result})` : "")}
+                    </TableBodyCell>
+                    <TableBodyCell>{formatNumber(point.points)}</TableBodyCell>
+                </TableRow>
+            ))
+        }
+    </tbody>
+</Table>
+</Card>

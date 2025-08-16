@@ -1,0 +1,13 @@
+---
+
+const { prize, season } = Astro.props;
+
+---
+
+<div class="flex space-x-2 items-center">
+    <img class="rounded-full size-6" src="/images/200x200.png" alt="avatar" />
+
+    <div>
+        {prize} {season}
+    </div>
+</div>

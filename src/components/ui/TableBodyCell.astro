@@ -1,0 +1,7 @@
+---
+const  {colspan, classList  } = Astro.props;
+---
+
+<td class="whitespace-nowrap px-4 py-3 sm:px-5" colspan={colspan} class:list={classList}>
+    <slot />
+</td>

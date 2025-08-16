@@ -1,0 +1,27 @@
+---
+import Badge from "@/components/badges/Badge.astro";
+import Card from "@/components/ui/Card.astro";
+
+
+const badges = [
+    { season : 25, badge : "TOP_TEAM" },
+    { season : 25, badge : "HOPE_WINNER" },
+    { season : 25, badge : "CHAMPIONS_LEAGUE_RUNNERUP" },
+    { season : 25, badge : "TRANSFERMARKET_KING" },
+
+]
+---
+
+<Card>
+    <h2>Badges</h2>
+    <div class="flex flex-col space-y-2">
+        {
+            badges.map((badge) => (
+                <Badge
+                    badge={badge.badge}
+                    season={badge.season}
+                />
+            ))
+        }
+    </div>
+</Card>

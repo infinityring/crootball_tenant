@@ -1,0 +1,12 @@
+---
+
+const { expandedItem = 'null' } = Astro.props;
+---
+
+<div x-data={`{expandedItem:'${expandedItem}'}`}" class="mt-5 flex flex-col">
+  <slot/>
+</div>
+
+
+
+

@@ -1,0 +1,58 @@
+---
+const { chartId, configuration } = Astro.props;
+
+
+const _chartId =
+  chartId ||
+  `chart-placeholder-${Math.random().toString(36).substring(7)}`;
+const _configuration = configuration ||{
+    series: [
+      {
+        name: "Player Stats",
+        data: [80, 70, 40, 40, 83, 55],
+      },
+    ],
+    chart: {
+      type: "radar",
+
+      toolbar: { show: false },
+      dropShadow: {
+        enabled: false, // more minimal look
+      },
+    },
+    stroke: {
+      width: 2,
+      colors: ["#ff0000"], // red stroke like in the image
+    },
+    fill: {
+      opacity: 0, // no fill, just outline
+    },
+    markers: {
+      size: 0, // no dots
+    },
+    xaxis: {
+      categories: ["SHO", "PAS", "STR", "DEF", "SPD", "DRI"],
+      labels: {
+        style: {
+          fontWeight: 700,
+          fontSize: "14px",
+          colors: ["#000", "#000", "#000", "#000", "#000", "#000"], // bold black labels
+        },
+      },
+    },
+    yaxis: {
+      show: false,
+      max: 100,
+    },
+  };
+
+
+---
+
+<script>
+  import "@/scripts/libs/charts.js"
+</script>
+<div
+x-data={`{ init : () => { renderChart("${chartId}") }}`}>    
+<div id = {chartId} data-config = {JSON.stringify(configuration)}> </div>
+</div>

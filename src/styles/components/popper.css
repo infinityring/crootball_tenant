@@ -1,5 +1,5 @@
 .popper-root {
-  @apply invisible z-[1000];
+  @apply invisible absolute z-[1000];
 }
 
 .popper-root.show {
@@ -7,10 +7,9 @@
 }
 
 .popper-root > .popper-box {
-  @apply opacity-0 duration-200 ease-out text-slate-500 dark:text-navy-200;
+  @apply text-slate-500 opacity-0 duration-200 ease-out dark:text-navy-200;
   transition-property: transform, visibility, opacity, translate;
 }
-
 
 .popper-root[data-popper-placement^="right"] > .popper-box {
   @apply translate-x-3;

@@ -1,0 +1,66 @@
+---
+import Card from "@/components/ui/Card.astro";
+import Table from "@/components/ui/Table.astro";
+import TableHeaderCell from "@/components/ui/TableHeaderCell.astro";
+import TableRow from "@/components/ui/TableRow.astro";
+import TableBodyCell from "@/components/ui/TableBodyCell.astro";
+import SearchPanel from "@/components/ui/alpine/SearchPanel.astro";
+import Textbox from "@/components/ui/alpine/Textbox.astro";
+import Button from "@/components/ui/alpine/Button.astro";
+
+const facilities = [
+    {
+        name: "stadium",
+        cost: 1000000,
+        annualMaintenance: 100000,
+        income: 1000000,
+    },
+    {
+        name: "training",
+        cost: 500000,
+        annualMaintenance: 50000,
+        income: 500000,
+    },
+    {
+        name: "marketing",
+        cost: 500000,
+        annualMaintenance: 50000,
+        income: 500000,
+    },
+    {
+        name: "stadium",
+        cost: 1000000,
+        annualMaintenance: 100000,
+        income: 1000000,
+    },
+
+
+];
+
+
+---
+
+<Card>
+    <h2>Facilities</h2>
+    <Table>
+        <thead slot="head">
+            <TableHeaderCell>Type</TableHeaderCell>
+            <TableHeaderCell>Description</TableHeaderCell>
+            <TableHeaderCell>In/Out</TableHeaderCell>
+            <TableHeaderCell>Value</TableHeaderCell>
+        </thead>
+
+        <tbody slot="body">
+            {
+                facilities.map((facility) => (
+                    <TableRow>
+                        <TableBodyCell>{facility.name}</TableBodyCell>
+                        <TableBodyCell>{facility.cost}</TableBodyCell>
+                        <TableBodyCell>{facility.annualMaintenance}</TableBodyCell>
+                        <TableBodyCell>{facility.income}</TableBodyCell>
+                    </TableRow>
+                ))
+            }
+        </tbody>
+    </Table>
+</Card>

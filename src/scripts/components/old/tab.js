@@ -6,6 +6,7 @@ export default class Tab {
   aciveTab = null;
 
   constructor(wrapper, onChange = () => { }) {
+
     if (wrapper instanceof HTMLElement) {
       this.wrapper = wrapper;
     } else {

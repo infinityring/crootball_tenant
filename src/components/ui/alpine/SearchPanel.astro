@@ -1,0 +1,29 @@
+---
+import Card from "@/components/ui/Card.astro";
+
+const onEvent = Astro.props.onEvent;
+
+const _alpineModel = "searchForm()"
+---
+<script>
+window.searchForm = () => {
+  return {
+    searchFormData : {
+        sampleField : "Sample value"
+    },
+    init() {
+      console.log("init Search Form");
+    },
+
+    doSearch(){
+        console.log("dosearch")
+      window.dispatchEvent(new CustomEvent("search", { detail: this.searchFormData }));
+    }
+
+  }
+}
+</script>
+
+<div x-data={_alpineModel}>
+    <slot />
+</div>

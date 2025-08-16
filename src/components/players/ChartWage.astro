@@ -1,0 +1,56 @@
+---
+import Chart from "../ui/alpine/Chart.astro";
+
+const {chartId, playerId } = Astro.props;
+
+const configuration = {
+    chart: {
+      type: "line",
+      zoom: {
+        enabled: false,
+      },
+      toolbar: {
+        tools: {
+          download: false,
+        },
+      },
+    },
+    series: [
+      {
+        name: "Market Value",
+        data: [
+          { x: "2025-03-22", y: 4.5 },
+          { x: "2025-04-10", y: 5.1 },
+          { x: "2025-04-30", y: 8.9 },
+          { x: "2025-05-15", y: 10.2 },
+          { x: "2025-06-01", y: 25.8 },
+          { x: "2025-07-01", y: 13.0 },
+
+          { x: "2025-08-01", y: null },
+        ],
+      },
+    ],
+    xaxis: {
+      type: "datetime",
+      labels: {
+        format: "MM/yy",
+      },
+    },
+    yaxis: {
+      labels: {
+        formatter: (val) => val.toFixed(2) + " mln €",
+      },
+    },
+    tooltip: {
+      x: {
+        format: "dd/MM/yyyy",
+      },
+      y: {
+        formatter: (val) => val.toFixed(2) + " mln €",
+      },
+    },
+  };
+
+---
+
+<Chart chartId={chartId} configuration={configuration}></Chart>

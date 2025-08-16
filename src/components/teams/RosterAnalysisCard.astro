@@ -1,0 +1,86 @@
+---
+import formatNumber from "@/lib/formatNumbers";
+import Card from "../ui/Card.astro";
+import FootballField from "../common/FootballField.astro";
+import Table from "../ui/Table.astro";
+import TableRow from "../ui/TableRow.astro";
+import TableBodyCell from "../ui/TableBodyCell.astro";
+
+const roster = [];
+
+const team = Astro.props.team;
+
+for (let i = 0; i < 27; i++) {
+    roster.push({
+        id: i + 1,
+        name: `Player ${i + 1}`,
+        slug: `player-${i + 1}`,
+        groupPosition: ["GK", "DF", "MF", "FW"][Math.floor(Math.random() * 4)],
+        positionOrder: i,
+        status: ["SVI", "INJ", "BAN", "LOA"][Math.floor(Math.random() * 4)],
+        wage: Math.floor(Math.random() * 100000),
+        value: Math.floor(Math.random() * 10000000),
+    });
+}
+
+const _team = {
+    name: "RCD Mallorca",
+    slug: "rcd-mallorca",
+    roster: roster,
+};
+
+const pins = [
+    { label: "GK", value: formatNumber(60000000) },
+    { label: "CB", value: formatNumber(77000000) },
+    { label: "LB", value: formatNumber(84000000) },
+    { label: "RB", value: formatNumber(78000000) },
+    { label: "DMF", value: formatNumber(85000000) },
+    { label: "LMF", value: formatNumber(78000000) },
+    { label: "CMF", value: formatNumber(87000000) },
+    { label: "RMF", value: formatNumber(78000000) },
+    { label: "AMF", value: formatNumber(870000000) },
+    { label: "RWF", value: formatNumber(860000000) },
+    { label: "LWF", value: formatNumber(860000000) },
+    { label: "SS", value: formatNumber(530000000) },
+    { label: "ST", value: formatNumber(530000000) },
+];
+---
+
+<Card>
+    <div class="grid grid-cols-2 gap-2">
+        <div class="flex justify-center">
+            <Table>
+                <tbody slot="body">
+                <TableRow>
+                    <TableBodyCell><span class="font-bold">Highest Wage</span></TableBodyCell>
+                    <TableBodyCell><span>Player 8</span></TableBodyCell>
+                </TableRow>
+                <TableRow>
+                    <TableBodyCell><span class="font-bold">Role with high expense</span></TableBodyCell>
+                    <TableBodyCell><span>AMF (135M)</span></TableBodyCell>
+                </TableRow>
+                <TableRow>
+                    <TableBodyCell><span class="font-bold">Players Value</span></TableBodyCell>
+                    <TableBodyCell><span>13MLD (29 Players)</span></TableBodyCell>
+                </TableRow>
+                
+                <TableRow>
+                    <TableBodyCell><span class="font-bold">U21 Value</span></TableBodyCell>
+                    <TableBodyCell><span>8MLD (12 Players)</span></TableBodyCell>
+                </TableRow>
+
+                <TableRow>
+                    <TableBodyCell><span class="font-bold">Total team value</span></TableBodyCell>
+                    <TableBodyCell><span>18MLD</span></TableBodyCell>
+                </TableRow>
+
+                </tbody>
+            </Table>
+        </div>
+
+        <div class="flex justify-center">
+            <FootballField pins={pins} />
+        </div>
+
+    </div>
+</Card>

@@ -1,0 +1,70 @@
+---
+import formatNumber from "@/lib/formatNumbers";
+import Card from "../ui/Card.astro";
+
+const roster = [];
+
+const team = Astro.props.team;
+
+for (let i = 0; i < 27; i++) {
+    roster.push({
+        id: i + 1,
+        name: `Player ${i + 1}`,
+        slug: `player-${i + 1}`,
+        groupPosition: ["GK", "DF", "MF", "FW"][Math.floor(Math.random() * 4)],
+        positionOrder: i,
+        status: ["SVI", "INJ", "BAN", "LOA"][Math.floor(Math.random() * 4)],
+        wage: Math.floor(Math.random() * 100000),
+        value: Math.floor(Math.random() * 10000000),
+    });
+}
+
+
+const _team = {
+    name : "RCD Mallorca",
+    slug: "rcd-mallorca",
+    roster: roster
+}
+
+---
+
+<Card>
+    <div class="my-3 flex h-8 items-center justify-between">
+        <h2 class="font-medium tracking-wide text-slate-700 dark:text-navy-100">
+            Roster
+        </h2>
+        <a
+            href={`/teams/${_team.slug}/roster`}
+            class="border-b border-dotted border-current pb-0.5 text-xs-plus font-medium text-primary outline-hidden transition-colors duration-300 hover:text-primary/70 focus:text-primary/70 dark:text-accent-light dark:hover:text-accent-light/70 dark:focus:text-accent-light/70"
+            >View All</a
+        >
+    </div>
+    <div class="space-y-3.5">
+        {_team.roster.map((player) => (
+            <a href={`/players/${player.slug}`} class="flex cursor-pointer items-center justify-between">
+                <div class="flex items-center space-x-3.5">
+                    <div class="avatar">
+                        <img
+                            class="rounded-full"
+                            src="/images/200x200.png"
+                            alt="avatar"
+                        />
+                    </div>
+                    <div>
+                        <p class="font-medium text-slate-700 dark:text-navy-100">
+                            {player.name}
+                        </p>
+                        <p
+                            class="text-xs text-slate-400 line-clamp-1 dark:text-navy-300"
+                        >
+                            {player.groupPosition} - {player.positionOrder}
+                        </p>
+                    </div>
+                </div>
+                <p class="font-medium text-slate-600 dark:text-navy-100">
+                    {formatNumber(player.value)}
+                </p>
+            </a>
+        ))}
+    </div>
+</Card>

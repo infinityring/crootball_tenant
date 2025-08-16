@@ -1,0 +1,41 @@
+---
+import Table from "@/components/ui/Table.astro";
+import TableHeaderCell from "@/components/ui/TableHeaderCell.astro";
+import TableBodyCell from "@/components/ui/TableBodyCell.astro";
+import TableRow from "@/components/ui/TableRow.astro";
+import Card from "@/components/ui/Card.astro";
+
+interface Props {
+    player: Player;
+}
+
+const { player } = Astro.props;
+---
+
+<Card>
+    <h3>Stats</h3>
+    <Table>
+      <thead slot="head">
+        <TableHeaderCell>Season</TableHeaderCell>
+        <TableHeaderCell>League</TableHeaderCell>
+        <TableHeaderCell>Apps</TableHeaderCell>
+        <TableHeaderCell>Goals</TableHeaderCell>
+        <TableHeaderCell>Assists</TableHeaderCell>
+      </thead>
+
+      <tbody slot="body">
+        {
+          player.stats.map((season) => (
+            <TableRow>
+              <TableBodyCell>{season.season}</TableBodyCell>
+              <TableBodyCell>{season.league}</TableBodyCell>
+              <TableBodyCell>{season.apps}</TableBodyCell>
+              <TableBodyCell>{season.goals}</TableBodyCell>
+              <TableBodyCell>{season.assists}</TableBodyCell>
+            </TableRow>
+          ))
+        }
+      </tbody>
+    </Table>
+
+  </Card>

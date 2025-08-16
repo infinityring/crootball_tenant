@@ -2,6 +2,7 @@
 const tenant = Astro.locals.tenant;
 const CONTENT_BASE_URL = import.meta.env.CONTENT_BASE_URL
 const logosrc= tenant?.configuration?.logo ? CONTENT_BASE_URL + tenant.configuration.logo : "/logo.svg"
+
 ---
 
 <div class="flex flex-rows items-center space-x-2">

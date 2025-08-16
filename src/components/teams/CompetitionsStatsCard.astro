@@ -1,0 +1,113 @@
+---
+import Badge from "@/components/prizes/Badge.astro";
+import Card from "@/components/ui/Card.astro";
+import SearchPanel from "@/components/ui/alpine/SearchPanel.astro";
+import Textbox from "@/components/ui/alpine/Textbox.astro";
+import Button from "@/components/ui/alpine/Button.astro";
+import Table from "@/components/ui/Table.astro";
+import TableHeaderCell from "@/components/ui/TableHeaderCell.astro";
+import TableRow from "@/components/ui/TableRow.astro";
+import TableBodyCell from "@/components/ui/TableBodyCell.astro";
+
+const competitionsStats = [
+    {
+        competition: "Champions League",
+        season: 25,
+        matches: 13,
+        wins: 10,
+        draws: 2,
+        losses: 1,
+        goalsScored: 28,
+        goalsConceded: 10,
+        position: 1,
+        points: 32,
+    },
+    {
+        competition: "La Liga",
+        season: 25,
+        matches: 38,
+        wins: 24,
+        draws: 8,
+        losses: 6,
+        goalsScored: 67,
+        goalsConceded: 33,
+        position: 2,
+        points: 80,
+    },
+    {
+        competition: "Copa del Rey",
+        season: 25,
+        matches: 6,
+        wins: 5,
+        draws: 0,
+        losses: 1,
+        goalsScored: 15,
+        goalsConceded: 4,
+        position: "Semi-final",
+        points: null,
+    },
+    {
+        competition: "Supercopa",
+        season: 25,
+        matches: 2,
+        wins: 1,
+        draws: 0,
+        losses: 1,
+        goalsScored: 3,
+        goalsConceded: 2,
+        position: "Runner-up",
+        points: null,
+    },
+];
+---
+
+<Card>
+    <h2>Competitions Stats</h2>
+    <div class="flex flex-col space-y-2">
+        <SearchPanel event="doSearch" data="searchFormData">
+            <Textbox
+                label="Season"
+                model="searchFormData.season"
+                placeholder="e.g. 23, 24, 25"
+            />
+            <Textbox
+                label="Competition"
+                model="searchFormData.competition"
+                placeholder="e.g. Champions League"
+            />
+            <Button label="Search" onClick="doSearch" />
+        </SearchPanel>
+        <Table>
+            <thead slot="head">
+                <TableHeaderCell>Comp</TableHeaderCell>
+                <TableHeaderCell>Season</TableHeaderCell>
+                <TableHeaderCell>MP</TableHeaderCell>
+                <TableHeaderCell>W</TableHeaderCell>
+                <TableHeaderCell>D</TableHeaderCell>
+                <TableHeaderCell>L</TableHeaderCell>
+                <TableHeaderCell>GF</TableHeaderCell>
+                <TableHeaderCell>GA</TableHeaderCell>
+                <TableHeaderCell>Pos</TableHeaderCell>
+                <TableHeaderCell>Pts</TableHeaderCell>
+            </thead>
+            <tbody slot="body">
+                {
+                    competitionsStats.map((stat) => (
+                        <TableRow>
+                            <TableBodyCell>{stat.competition}</TableBodyCell>
+                            <TableBodyCell>{stat.season}</TableBodyCell>
+                            <TableBodyCell>{stat.matches}</TableBodyCell>
+                            <TableBodyCell>{stat.wins}</TableBodyCell>
+                            <TableBodyCell>{stat.draws}</TableBodyCell>
+                            <TableBodyCell>{stat.losses}</TableBodyCell>
+                            <TableBodyCell>{stat.goalsScored}</TableBodyCell>
+                            <TableBodyCell>{stat.goalsConceded}</TableBodyCell>
+                            <TableBodyCell>{stat.position}</TableBodyCell>
+                            <TableBodyCell>{stat.points ?? "-"}</TableBodyCell>
+                        </TableRow>
+                    ))
+                }
+            </tbody>
+        </Table>
+    </div>
+</Card>

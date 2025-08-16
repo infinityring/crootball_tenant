@@ -1,0 +1,13 @@
+---
+const { player }= Astro.props;
+
+const avaliableOperations = [
+    { label : "New operation", link: `/operations`},
+];
+
+---
+
+
+{avaliableOperations.map((operation) => (
+    <a class="btn bg-primary text-white" href={operation.link}>{operation.label}</a>
+))}

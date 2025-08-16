@@ -1,16 +1,27 @@
 ---
 import Header from "@/components/Header.astro";
-import Layout from "@/layouts/Tenant.astro";
+import Tenant from "@/layouts/Tenant.astro";
 
 const tenant = Astro.locals.tenant;
 const user = Astro.locals.user
+const team = Astro.locals.team
+const client = Astro.locals.crootballClient
 const tenantName = tenant.configuration.name || "Tenant name";
 
 const CONTENT_BASE_URL = import.meta.env.CONTENT_BASE_URL
 
 
+if(team){
+  return Astro.redirect(`/teams/${team.slug}`);
+}
+
+
+if(user){
+  return Astro.redirect(`/users/${user.slug}`);
+}
+
 ---
-<Layout navigation="horizontal">
+<Tenant>
   <div id="root" class="cloak flex flex-col items-center w-full bg-white dark:bg-black">
     <Header nologo={true}/>
     <main class="main-content w-full px-[var(--margin-x)] pb-8">
@@ -32,4 +43,4 @@ const CONTENT_BASE_URL = import.meta.env.CONTENT_BASE_URL
 
     </main>
   </div>
-</Layout>
+</Tenant>

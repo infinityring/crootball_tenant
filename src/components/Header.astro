@@ -14,11 +14,6 @@ const tenant = Astro.locals.tenant;
 let redirectTenant = null;
 
 
-const tenantName = tenant.configuration.name || "Tenant name";
-
-const CONTENT_BASE_URL = import.meta.env.CONTENT_BASE_URL
-
-
 ---
 
 <nav class="header print:hidden" class:list={[nologo && "border-transparent!"]}>

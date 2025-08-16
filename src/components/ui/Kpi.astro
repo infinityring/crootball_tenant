@@ -1,0 +1,11 @@
+---
+
+const kpi = Astro.props.kpi;
+
+---
+<a href={kpi.link} class="card flex flex-col items-center justify-between p-2">
+    <span class="font-bold">
+        {kpi.topvalue}
+    </span>
+    <p class="text-xs">{kpi.label}</p>
+</a>

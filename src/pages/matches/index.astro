@@ -1,0 +1,38 @@
+---
+import MatchesCard from "@/components/matches/MatchesCard.astro";
+import TenantUser from "@/layouts/TenantUser.astro";
+import SearchPanel from "@/components/ui/alpine/SearchPanel.astro";
+import Textbox from "@/components/ui/alpine/Textbox.astro";
+import Button from "@/components/ui/alpine/Button.astro";
+
+
+const _team = {
+  name: "RCD Mallorca",
+  slug: "rcd-mallorca",
+};
+---
+
+<TenantUser>
+  <h1>Matches</h1>
+  <div class="flex flex-col space-y-4 w-4xl">
+    <SearchPanel event="doSearch" data="searchFormData">
+      <Textbox
+        label="Season"
+        model="searchFormData.fromTeam"
+        placeholder="24"
+      />
+      <Textbox
+        label="Competition"
+        model="searchFormData.toTeam"
+        placeholder="Searie A"
+      />
+      <Textbox
+      label="Team"
+      model="searchFormData.team"
+      placeholder="Searie A"
+    />
+      <Button label="Search" onClick="doSearch" />
+    </SearchPanel>
+    <MatchesCard team={_team} />
+  </div>
+</TenantUser>

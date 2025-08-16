@@ -1,0 +1,15 @@
+---
+import Card from "@/components/ui/Card.astro";
+import Table from "@/components/ui/Table.astro";
+
+const event = Astro.props.event;
+
+const {_alpineModel} = Astro.props;
+---
+
+<div x-data={_alpineModel} @search.window="updateResults" class="is-scrollbar-hidden min-w-full overflow-x-auto">
+  <table class="w-full text-left is-hoverable cursor-pointer">
+    <slot name="head" />
+    <slot name="body" />
+  </table>
+</div>

@@ -1,0 +1,42 @@
+---
+import Table from "@/components/ui/Table.astro";
+import TableHeaderCell from "@/components/ui/TableHeaderCell.astro";
+import TableBodyCell from "@/components/ui/TableBodyCell.astro";
+import TableRow from "@/components/ui/TableRow.astro";
+import Card from "@/components/ui/Card.astro";
+
+
+interface Props {
+    player: Player;
+}
+
+const { player } = Astro.props;
+--- 
+
+<Card>
+    <h3>Last Matches</h3>
+    <Table>
+        <thead slot="head">
+            <TableHeaderCell>Home Team</TableHeaderCell>
+            <TableHeaderCell>Away Team</TableHeaderCell>
+            <TableHeaderCell>Goals</TableHeaderCell>
+            <TableHeaderCell>Yellow</TableHeaderCell>
+            <TableHeaderCell>Red</TableHeaderCell>
+        </thead>
+
+        <tbody slot="body">
+            {
+                player.lastMatches.map((match) => (
+                    <TableRow>
+                        <TableBodyCell>{match.homeTeam}</TableBodyCell>
+                        <TableBodyCell>{match.awayTeam}</TableBodyCell>
+                        <TableBodyCell>{match.goals}</TableBodyCell>
+                        <TableBodyCell>{match.yellow}</TableBodyCell>
+                        <TableBodyCell>{match.red}</TableBodyCell>
+                    </TableRow>
+                ))
+            }
+        </tbody>
+    </Table>
+</Card>
+

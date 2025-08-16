@@ -1,7 +1,7 @@
 ---
 import AppPreloader from "@/components/common/AppPreloader.astro";
 import Fonts from "@/components/common/Fonts.astro";
-import "@/styles/global.css";
+import "@/styles/app.css";
 ---
 
 <!doctype html>
@@ -13,25 +13,27 @@ import "@/styles/global.css";
         <meta name="generator" content={Astro.generator} />
         <title>Crootball</title>
 
-        <script src="../scripts/app.js"></script>
         <script>
-            /**
-             * THIS SCRIPT REQUIRED FOR PREVENT FLICKERING IN SOME BROWSERS
-             */
+            import "@/scripts/app.js";
+        </script>
+        <script is:inline>
             localStorage.getItem("dark-mode") === "dark" &&
                 document.documentElement.classList.add("dark");
         </script>
 
         <Fonts />
     </head>
-    <body class="is-header-blur">
+    <body class="is-header-blur" @load.window="$store.global.hideLoader">
         <AppPreloader />
         <slot />
+        <div id="x-teleport-target"></div>
+        <script>
+            window.addEventListener("DOMContentLoaded", () => Alpine.start());
+        </script>
     </body>
-    <div id="x-teleport-target"></div>
 </html>
 
-<style>
+<!--style>
     html,
     body {
         margin: 0;
@@ -39,3 +41,4 @@ import "@/styles/global.css";
         height: 100%;
     }
 </style>
+-->

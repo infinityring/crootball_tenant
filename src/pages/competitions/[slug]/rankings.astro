@@ -1,0 +1,51 @@
+---
+import TenantCompetition from "@/layouts/TenantCompetition.astro";
+import SummaryCard from "@/components/competitions/SummaryCard.astro";
+import RoundRobinCard from "@/components/competitions/RoundRobinCard.astro";
+import KnockoutCard from "@/components/competitions/KnockoutCard.astro";
+import AccordionPanel from "@/components/ui/alpine/AccordionPanel.astro";
+import Accordion from "@/components/ui/alpine/Accordion.astro";
+import Card from "@/components/ui/Card.astro";
+
+const _team = {
+  name: "RCD Mallorca",
+  slug: "rcd-mallorca",
+};
+
+const competition =   {
+    id: 1,
+    name: "Champions League",
+    prestige : 100,
+    status: "Quarters",
+    teams: 16,
+    season : 24,
+    slug: "champion-league",
+    logo: "/images/800x800.png",
+    phases : [
+      { name : "Group Phase", type : "roundrobin", status : "CLOSED"},
+      { name : "Quarters", type : "knockout", status : "CURRENT"},
+      { name : "Semifinals", type : "knockout", status : "PLANNED"},
+      { name : "Final", type : "knockout", status : "PLANNED"},
+    ]
+  }
+
+
+  const _activePhase = competition.phases.find((phase) => phase.status === "CURRENT");
+---
+
+<TenantCompetition>
+  <h1>Competition Rankings</h1>
+  <SummaryCard competition={competition} />
+  <Card>
+    <h2>Table </h2>
+  </Card>
+  <Card>
+    <h2>Stats Players</h2>
+  </Card>
+  <Card>
+    <h2>Stats Teams</h2>
+  </Card>
+  <Card>
+    <h2>Stats Managers</h2>
+  </Card>
+</TenantCompetition>

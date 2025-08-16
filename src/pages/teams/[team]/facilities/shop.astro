@@ -1,0 +1,69 @@
+---
+import FacilitiesCard from "@/components/teams/FacilitiesCard.astro";
+import TenantTeam from "@/layouts/TenantTeam.astro";
+import Button from "@/components/ui/alpine/Button.astro";
+import Table from "@/components/ui/Table.astro";
+import TableHeaderCell from "@/components/ui/TableHeaderCell.astro";
+import TableRow from "@/components/ui/TableRow.astro";
+import TableBodyCell from "@/components/ui/TableBodyCell.astro";
+
+const _team = {
+  name: "RCD Mallorca",
+  slug: "rcd-mallorca",
+};
+
+const facilities = [
+  {
+    level: 2,
+    name: "Stadium 5000",
+    price: 10000000,
+    description: "Stadium 5000",
+    maintenance: 100000,
+  },
+  {
+    level: 2,
+    name: "Youth team",
+    price: 10000000,
+    description: "Youth team",
+    maintenance: 100000,
+  },
+  {
+    level: 3,
+    name: "Marketing",
+    price: 10000000,
+    description: "Marketing",
+    maintenance: 100000,
+  },
+];
+---
+
+<TenantTeam>
+  <h1>Team {_team.name} Facilities Shop</h1>
+  <div class="flex flex-col space-y-4 w-4xl mx-auto" x-data="{}">
+    <FacilitiesCard team={_team} />
+    <Table>
+      <thead slot="head">
+        <TableHeaderCell>Name</TableHeaderCell>
+        <TableHeaderCell>Description</TableHeaderCell>
+        <TableHeaderCell>Maintenance</TableHeaderCell>
+        <TableHeaderCell>Price</TableHeaderCell>
+        <TableHeaderCell>Action</TableHeaderCell>
+      </thead>
+      <tbody slot="body">
+        {
+          facilities.map((facility) => (
+            <TableRow  onClick="window.location.href = '/teams/rcd-mallorca/facilities/stadium-5000'">
+              <TableBodyCell>{facility.name}</TableBodyCell>
+              <TableBodyCell>{facility.description}</TableBodyCell>
+              <TableBodyCell>{facility.maintenance}</TableBodyCell>
+              <TableBodyCell>{facility.price}</TableBodyCell>
+              <TableBodyCell>
+                <Button label="Buy" onClick="window.location.href = '/teams/rcd-mallorca/facilities/stadium-5000'" />
+              </TableBodyCell>
+            </TableRow>
+          ))
+        }
+      </tbody>
+    </Table>
+  </div>
+</TenantTeam>

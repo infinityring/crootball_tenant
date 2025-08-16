@@ -1,0 +1,57 @@
+---
+import Table from "@/components/ui/Table.astro";
+import TableBodyCell from "@/components/ui/TableBodyCell.astro";
+import TableRow from "@/components/ui/TableRow.astro";
+
+interface Props {
+    player: Player;
+    attributeMap: AttributeConfig[];
+}
+
+const { player, attributeMap } = Astro.props;
+
+const grouppedAttributes = attributeMap.reduce((acc, config) => {   
+    const group = acc.find((group) => group.group === config.abilityGroup2);
+    if (!group) {
+      acc.push({
+        group: config.abilityGroup2,
+        attributes: [config],
+        average: 0,
+      });
+    } else {
+      group.attributes.push(config);
+      group.average = 88//group.attributes.reduce((sum, attribute) => sum + player.attributes[attribute.model], 0) / group.attributes.length;
+    }
+    return acc;
+  }, []);
+
+---
+
+<div>
+    <Table>
+      <tbody slot="body">
+        {grouppedAttributes.map((group) => (
+          <>
+            <TableRow>
+              <TableBodyCell classList={{"bg-slate-200 dark:bg-navy-500": true}}>
+                <span class="font-bold">{group.group}</span>
+              </TableBodyCell>
+              <TableBodyCell  classList={{"bg-slate-200 dark:bg-navy-500": true}}>
+                  <span>{group.average}</span>
+                </TableBodyCell>
+            </TableRow>
+            {group.attributes.map((config) => (
+              <TableRow>
+                <TableBodyCell>
+                  <span class="font-bold">{config.label}</span>
+                </TableBodyCell>
+                <TableBodyCell>
+                  <span>{player.attributes[config.attribute]}</span>
+                </TableBodyCell>
+              </TableRow>
+            ))}
+          </>
+        ))}
+      </tbody>
+    </Table>
+  </div>

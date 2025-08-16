@@ -1,0 +1,9 @@
+---
+const user = Astro.locals.user;
+const PORTAL_URL = import.meta.env.PORTAL_URL;
+
+---
+
+<div class="card items-center bg-warning text-white">
+    You don't have a team, ask to <a href={`${PORTAL_URL}/${user.slug}/join`}>Join</a>...
+</div>

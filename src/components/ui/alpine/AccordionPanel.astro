@@ -1,0 +1,21 @@
+---
+const { panelTitle } = Astro.props;
+
+---
+<div x-data={`accordionItem('${panelTitle}')`}>
+  <div
+    @click="expanded = !expanded"
+    class="flex cursor-pointer items-center justify-between py-4 text-base font-medium text-slate-700 dark:text-navy-100"
+  >
+    <p>{panelTitle}</p>
+    <div
+      :class="expanded && '-rotate-180'"
+      class="text-sm font-normal leading-none text-slate-400 transition-transform duration-300 dark:text-navy-300"
+    >
+      <span class="material-symbols-outlined">expand_more</span>
+    </div>
+  </div>
+  <div x-collapse x-show="expanded">
+    <slot />
+  </div>
+</div>

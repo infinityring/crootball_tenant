@@ -1,0 +1,37 @@
+---
+import LineMenu from "@/components/common/LineMenu.astro";
+import getTeamMenu from "@/lib/getTeamMenu";
+import Tenant from "./Tenant.astro";
+import Header from "@/components/Header.astro";
+
+const { title, alpineModel } = Astro.props || { title: "Undefined Title" };
+
+const _team = {
+  name: "RCD Mallorca",
+  slug: "rcd-mallorca",
+  manager : {
+    name: "Manager 1",
+    slug: "manager-1",
+  }
+};
+
+const teamMenu = getTeamMenu({ context: Astro.locals, team: _team });
+---
+
+<Tenant>
+    <div
+        id="root"
+        class="cloak flex flex-col items-center w-full bg-white dark:bg-black"
+        x-data={alpineModel}
+    >
+        <Header />
+        <main class="main-content w-full px-[var(--margin-x)] pb-8">
+            <div
+                class="flex flex-col items-center justify-center w-full h-v mt-10"
+            >
+                <LineMenu menu={teamMenu} />
+                <slot />
+            </div>
+        </main>
+    </div>
+</Tenant>

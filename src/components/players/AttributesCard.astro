@@ -1,0 +1,216 @@
+---
+import Card from "@/components/ui/Card.astro";
+import AttributesGroup1Card from "./AttributesGroup1Card.astro";
+import AttributesGroup2Card from "./AttributesGroup2Card.astro";
+import TabWrapper from "@/components/ui/alpine/TabWrapper.astro";
+import Tab from "@/components/ui/alpine/Tab.astro";
+
+interface Props {
+    player: Player;
+}
+
+const { player } = Astro.props;
+
+const attributeMap = [
+    {
+        order: 1,
+        attribute: "offensiveAwareness",
+        label: "Offensive Awareness",
+        abilityGroup1: "Attacking",
+        abilityGroup2: "Attack",
+    },
+    {
+        order: 2,
+        attribute: "finishing",
+        label: "Finishing",
+        abilityGroup1: "Attacking",
+        abilityGroup2: "Attack",
+    },
+    {
+        order: 3,
+        attribute: "kickingPower",
+        label: "Kicking Power",
+        abilityGroup1: "Attacking",
+        abilityGroup2: "Strength",
+    },
+
+    {
+        order: 4,
+        attribute: "ballControl",
+        label: "Ball Control",
+        abilityGroup1: "Dribbling",
+        abilityGroup2: "Attack",
+    },
+    {
+        order: 5,
+        attribute: "dribbling",
+        label: "Dribbling",
+        abilityGroup1: "Dribbling",
+        abilityGroup2: "Attack",
+    },
+    {
+        order: 6,
+        attribute: "tightPossession",
+        label: "Tight Possession",
+        abilityGroup1: "Dribbling",
+        abilityGroup2: "Attack",
+    },
+    {
+        order: 7,
+        attribute: "balance",
+        label: "Balance",
+        abilityGroup1: "Dribbling",
+        abilityGroup2: "Strength",
+    },
+
+    {
+        order: 8,
+        attribute: "lowPass",
+        label: "Low Pass",
+        abilityGroup1: "Passing",
+        abilityGroup2: "Attack",
+    },
+    {
+        order: 9,
+        attribute: "loftedPass",
+        label: "Lofted Pass",
+        abilityGroup1: "Passing",
+        abilityGroup2: "Attack",
+    },
+    {
+        order: 10,
+        attribute: "setPieceTaking",
+        label: "Set Piece Taking",
+        abilityGroup1: "Passing",
+        abilityGroup2: "Attack",
+    },
+    {
+        order: 11,
+        attribute: "curl",
+        label: "Curl",
+        abilityGroup1: "Passing",
+        abilityGroup2: "Attack",
+    },
+
+    {
+        order: 12,
+        attribute: "heading",
+        label: "Heading",
+        abilityGroup1: "Defending",
+        abilityGroup2: "Attack",
+    },
+    {
+        order: 13,
+        attribute: "jump",
+        label: "Jumping",
+        abilityGroup1: "Defending",
+        abilityGroup2: "Strength",
+    },
+    {
+        order: 14,
+        attribute: "defensiveAwareness",
+        label: "Defensive Awareness",
+        abilityGroup1: "Defending",
+        abilityGroup2: "Defence",
+    },
+    {
+        order: 15,
+        attribute: "tackling",
+        label: "Tackling",
+        abilityGroup1: "Defending",
+        abilityGroup2: "Defence",
+    },
+    {
+        order: 16,
+        attribute: "defensiveEngagement",
+        label: "Defensive Engagement",
+        abilityGroup1: "Defending",
+        abilityGroup2: "Defence",
+    },
+    {
+        order: 17,
+        attribute: "aggression",
+        label: "Aggression",
+        abilityGroup1: "Defending",
+        abilityGroup2: "Defence",
+    },
+
+    {
+        order: 18,
+        attribute: "speed",
+        label: "Speed",
+        abilityGroup1: "Physicality",
+        abilityGroup2: "Strength",
+    },
+    {
+        order: 19,
+        attribute: "acceleration",
+        label: "Acceleration",
+        abilityGroup1: "Physicality",
+        abilityGroup2: "Strength",
+    },
+    {
+        order: 20,
+        attribute: "physicalContact",
+        label: "Physical Contact",
+        abilityGroup1: "Physicality",
+        abilityGroup2: "Strength",
+    },
+    {
+        order: 21,
+        attribute: "stamina",
+        label: "Stamina",
+        abilityGroup1: "Physicality",
+        abilityGroup2: "Strength",
+    },
+
+    {
+        order: 22,
+        attribute: "gkAwareness",
+        label: "GK Awareness",
+        abilityGroup1: "Goalkeeping",
+        abilityGroup2: "Defence",
+    },
+    {
+        order: 23,
+        attribute: "gkCatching",
+        label: "GK Catching",
+        abilityGroup1: "Goalkeeping",
+        abilityGroup2: "Defence",
+    },
+    {
+        order: 24,
+        attribute: "gkParrying",
+        label: "GK Parrying",
+        abilityGroup1: "Goalkeeping",
+        abilityGroup2: "Defence",
+    },
+    {
+        order: 25,
+        attribute: "gkReflexes",
+        label: "GK Reflexes",
+        abilityGroup1: "Goalkeeping",
+        abilityGroup2: "Defence",
+    },
+    {
+        order: 26,
+        attribute: "gkReach",
+        label: "GK Reach",
+        abilityGroup1: "Goalkeeping",
+        abilityGroup2: "Defence",
+    },
+];
+---
+<Card>
+    <TabWrapper tabs={[
+        { id: "group1", label : "Group 1", active:true},
+        { id: "group2", label : "Group 2", active:false},
+    ]}>
+        <Tab id="group1" >
+            <AttributesGroup1Card player={player} attributeMap={attributeMap} />
+        </Tab>
+        <Tab id="group2">
+            <AttributesGroup2Card player={player} attributeMap={attributeMap} />
+        </Tab>
+    </TabWrapper>
+</Card>

@@ -1,0 +1,16 @@
+---
+const { team }= Astro.props;
+
+const baseUrl = `/teams/${team.slug}`;
+
+
+const avaliableOperations = [
+    { label : "Formations", link: `${baseUrl}/roster/formations`},
+];
+
+---
+
+
+{avaliableOperations.map((operation) => (
+    <a class="btn bg-primary text-white" href={operation.link}>{operation.label}</a>
+))}

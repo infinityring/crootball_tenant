@@ -1,0 +1,41 @@
+---
+import Card from "@/components/ui/Card.astro";
+import Kpi from "@/components/ui/Kpi.astro";
+
+const { competition, link } = Astro.props;
+---
+
+<Card>
+    <a href={link} class="flex items-center gap-2">
+        <div class="avatar size-48 md:size-24!">
+            <img class="rounded-lg" src="/images/800x800.png" alt="avatar" />
+        </div>
+        <div class="flex flex-col w-full space-y-2">
+            <h3>{competition.name}</h3>
+            <Kpi
+                kpi={{
+                    topvalue: competition.status,
+                    label: "Status",
+                    link: `/competitions/${competition.slug}`,
+                }}
+            />
+
+            <Kpi
+                kpi={{
+                    topvalue: competition.prestige,
+                    label: "Prestige",
+                    link: `/competitions/${competition.slug}`,
+                }}
+            />
+
+            <Kpi
+            kpi={{
+                topvalue: competition.season,
+                label: "Stagione",
+                link: `/competitions/${competition.slug}`,
+            }}
+        />
+
+        </div>
+    </a>
+</Card>

@@ -1,0 +1,11 @@
+---
+const team = Astro.props.team;
+---
+
+<div class="flex space-x-2 items-center">
+    <img class="rounded-full size-6" src={team.logo} alt="avatar" />
+
+    <div>
+        {team.name} ({team.manager.name})
+    </div>
+</div>

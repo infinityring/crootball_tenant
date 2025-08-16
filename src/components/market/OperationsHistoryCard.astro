@@ -1,0 +1,106 @@
+---
+import Card from "@/components/ui/Card.astro";
+import Table from "@/components/ui/Table.astro";
+import TableHeaderCell from "@/components/ui/TableHeaderCell.astro";
+import TableRow from "@/components/ui/TableRow.astro";
+import TableBodyCell from "@/components/ui/TableBodyCell.astro";
+import SearchPanel from "@/components/ui/alpine/SearchPanel.astro";
+import Textbox from "@/components/ui/alpine/Textbox.astro";
+import Button from "@/components/ui/alpine/Button.astro";
+
+const operationsHistory = [
+    {
+        id: 1,
+        date: "2025-08-16",
+        player: { id: 1, name: "Player1" },
+        team: { id: 1, name: "Team1" },
+        value: 100000,
+        type: "TRANSFER",
+        direction: "IN",
+        status: "REFUSED",
+    },
+    {
+        id: 2,
+        date: "2025-08-16",
+        player: { id: 2, name: "Player2" },
+        team: { id: 2, name: "Team2" },
+        value: 200000,
+        type: "LOAN",
+        direction: "IN",
+        status: "REFUSED",
+    },
+    {
+        id: 3,
+        date: "2025-08-16",
+        player: { id: 3, name: "Player3" },
+        team: { id: 3, name: "Team3" },
+        value: 300000,
+        type: "TRANSFER",
+        direction: "OUT",
+        status: "ACCPTED",
+    },
+    {
+        id: 4,
+        date: "2025-08-16",
+        player: { id: 4, name: "Player4" },
+        team: { id: 4, name: "Team4" },
+        value: 400000,
+        type: "TRANSFER",
+        direction: "OUT",
+        status: "ERROR",
+    },
+];
+---
+
+<Card>
+    <h2>Operations History</h2>
+    <SearchPanel event="doSearch" data="searchFormData">
+        <Textbox
+            label="Other Team"
+            model="searchFormData.fromTeam"
+            placeholder="Mallorca"
+        />
+        <Textbox
+            label="Player"
+            model="searchFormData.player"
+            placeholder="Roony"
+        />
+        <Textbox
+            label="Season"
+            model="searchFormData.season"
+            placeholder="2025"
+        />
+        <Button label="Search" onClick="doSearch" />
+    </SearchPanel>
+    <Table>
+        <thead slot="head">
+            <TableHeaderCell>Player</TableHeaderCell>
+            <TableHeaderCell>Team</TableHeaderCell>
+            <TableHeaderCell>Type</TableHeaderCell>
+            <TableHeaderCell>In/Out</TableHeaderCell>
+            <TableHeaderCell>Value</TableHeaderCell>
+            <TableHeaderCell>Status</TableHeaderCell>
+        </thead>
+
+        <tbody slot="body">
+            {
+                operationsHistory.map((operation) => (
+                    <TableRow>
+                        <TableBodyCell>{operation.player.name}</TableBodyCell>
+                        <TableBodyCell>{operation.team.name}</TableBodyCell>
+                        <TableBodyCell>{operation.type}</TableBodyCell>
+                        <TableBodyCell>{operation.direction}</TableBodyCell>
+                        <TableBodyCell>{operation.value}</TableBodyCell>
+                        <TableBodyCell>
+                            {operation.status === "NEED_APPROVAL" ? (
+                                <Button label="Approve" />
+                            ) : (
+                                "Wait Approval"
+                            )}
+                        </TableBodyCell>
+                    </TableRow>
+                ))
+            }
+        </tbody>
+    </Table>
+</Card>

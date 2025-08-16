@@ -1,0 +1,58 @@
+---
+import formatNumber from "@/lib/formatNumbers";
+import Card from "@/components/ui/Card.astro";
+import Kpi from "@/components/ui/Kpi.astro";
+
+const userResume = {
+    name: "Jon Doe",
+    slug: "jon-doe",
+    attributes: {
+        points: 34300,
+        league: 5,
+        general: 13,
+    },
+    badges: [
+        { label: "King of the market", color: "error" },
+        { label: "Young scout", color: "error" },
+        { label: "Golden foot", color: "error" },
+    ],
+};
+
+const resumeConfiguration = {
+    bigNumber: { label: "Balance", field: "balance" },
+    kpis: [
+        { label: "Wages", field: "points" },
+        { label: "League Eval.", field: "league" },
+        { label: "General Eval", field: "general" },
+
+    ],
+};
+---
+
+<Card>
+    <h2>{userResume.name}</h2>
+    <div class="grid grid-cols-3 gap-1">
+        {
+            resumeConfiguration.kpis.map((kpi) => (
+                <Kpi
+                    kpi={{
+                        topvalue: formatNumber(
+                        userResume.attributes[kpi.field],
+                        ),
+                        label: kpi.label,
+                        link: `/users/${userResume.slug}`,
+                    }}
+                />
+            ))
+        }
+    </div>
+    <div class="flex items-center justify-center space-x-2 mt-4">
+        {
+            userResume.badges.map((badge) => (
+                <div class={`badge bg-primary text-white`}>
+                   {badge.label}
+                </div>
+            ))
+        }
+    </div>
+</Card>

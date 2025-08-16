@@ -1,0 +1,113 @@
+---
+import Badge from "@/components/prizes/Badge.astro";
+import Card from "@/components/ui/Card.astro";
+import SearchPanel from "@/components/ui/alpine/SearchPanel.astro";
+import Textbox from "@/components/ui/alpine/Textbox.astro";
+import Button from "@/components/ui/alpine/Button.astro";
+import Table from "@/components/ui/Table.astro";
+import TableHeaderCell from "@/components/ui/TableHeaderCell.astro";
+import TableRow from "@/components/ui/TableRow.astro";
+import TableBodyCell from "@/components/ui/TableBodyCell.astro";
+
+const playersStats = [
+    {
+        player: "player1",
+        appearances: 100,
+        goals: 10,
+        assists: 10,
+        yellowCards: 10,
+        redCards: 10,
+        season: 25,
+        vg: -3,
+        value: -10000000,
+    },
+    {
+        player: "player2",
+        appearances: 100,
+        goals: 10,
+        assists: 10,
+        yellowCards: 10,
+        redCards: 10,
+        season: 25,
+        vg: -3,
+        value: -10000000,
+    },
+    {
+        player: "player3",
+        appearances: 100,
+        goals: 10,
+        assists: 10,
+        yellowCards: 10,
+        redCards: 10,
+        season: 25,
+        vg: -3,
+        value: -10000000,
+    },
+    {
+        player: "player4",
+        appearances: 100,
+        goals: 10,
+        assists: 10,
+        yellowCards: 10,
+        redCards: 10,
+        season: 25,
+        vg: -3,
+        value: -10000000,
+    },
+    {
+        player: "player5",
+        appearances: 100,
+        goals: 10,
+        assists: 10,
+        yellowCards: 10,
+        redCards: 10,
+        season: 25,
+        vg: -3,
+        value: -10000000,
+    },
+];
+---
+
+<Card>
+    <h2>Players Stats</h2>
+    <div class="flex flex-col space-y-2">
+        <SearchPanel event="doSearch" data="searchFormData">
+            <Textbox
+                label="Seasons"
+                model="searchFormData.player"
+                placeholder="23 - 24"
+            />
+            <Button label="Search" onClick="doSearch" />
+        </SearchPanel>
+        <Table>
+            <thead slot="head">
+                <TableHeaderCell>Player</TableHeaderCell>
+                <TableHeaderCell>Season</TableHeaderCell>
+                <TableHeaderCell>Apps</TableHeaderCell>
+                <TableHeaderCell>Goals</TableHeaderCell>
+                <TableHeaderCell>Assists</TableHeaderCell>
+                <TableHeaderCell>Yellow</TableHeaderCell>
+                <TableHeaderCell>Red</TableHeaderCell>
+                <TableHeaderCell>VG</TableHeaderCell>
+                <TableHeaderCell>Value</TableHeaderCell>
+            </thead>
+            <tbody slot="body">
+                {
+                    playersStats.map((stat) => (
+                        <TableRow>
+                            <TableBodyCell>{stat.player}</TableBodyCell>
+                            <TableBodyCell>{stat.season}</TableBodyCell>
+                            <TableBodyCell>{stat.appearances}</TableBodyCell>
+                            <TableBodyCell>{stat.goals}</TableBodyCell>
+                            <TableBodyCell>{stat.assists}</TableBodyCell>
+                            <TableBodyCell>{stat.yellowCards}</TableBodyCell>
+                            <TableBodyCell>{stat.redCards}</TableBodyCell>
+                            <TableBodyCell>{stat.vg}</TableBodyCell>
+                            <TableBodyCell>{stat.value}</TableBodyCell>
+                        </TableRow>
+                    ))
+                }
+            </tbody>
+        </Table>
+    </div>
+</Card>

@@ -1,0 +1,19 @@
+---
+const competition = {
+    name: "La Liga",
+    label: "Qualification",
+    slug: "la-liga",
+    logo: "/images/200x200.png",
+};
+---
+
+<a
+    href={`/competitions/${competition.slug}`}
+    class="flex space-x-2 items-center"
+>
+    <img class="rounded-full size-6" src={competition.logo} alt="avatar" />
+
+    <div>
+        {competition.name}, {competition.label}
+    </div>
+</a>

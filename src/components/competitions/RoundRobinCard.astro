@@ -1,0 +1,11 @@
+---
+import Card from "@/components/ui/Card.astro";
+import Accordion from "../ui/alpine/Accordion.astro";
+
+const { competition, phase } = Astro.props;
+---
+
+<Card>
+   <h2>Round Robin {phase.name}</h2>
+   <Accordion></Accordion>
+</Card>

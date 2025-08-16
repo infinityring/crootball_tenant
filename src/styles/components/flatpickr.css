@@ -109,20 +109,20 @@ span.flatpickr-weekday,
 
 .flatpickr-day.inRange {
   box-shadow:
-    -5px 0 0 var(--color-slate-150),
-    5px 0 0 var(--color-slate-150);
+    -5px 0 0 var(--color-slate-500),
+    5px 0 0 var(--color-slate-500);
 }
 
 .dark .flatpickr-day.inRange {
   box-shadow:
-    -5px 0 0 var(--colors-navy-500),
-    5px 0 0 var(--colors-navy-500);
+    -5px 0 0 var(--color-navy-500),
+    5px 0 0 var(--color-navy-500);
 }
 
 .flatpickr-day.selected.startRange + .endRange:not(:nth-child(7n + 1)),
 .flatpickr-day.startRange.startRange + .endRange:not(:nth-child(7n + 1)),
 .flatpickr-day.endRange.startRange + .endRange:not(:nth-child(7n + 1)) {
-  box-shadow: var(--colors-primary) -10px 0 0;
+  box-shadow: var(--color-accent) -10px 0 0;
 }
 
 .dark .flatpickr-day.selected.startRange + .endRange:not(:nth-child(7n + 1)),
@@ -131,12 +131,14 @@ span.flatpickr-weekday,
   box-shadow: var(--color-accent) -10px 0 0;
 }
 
+.flatpickr-calendar.arrowTop,
 .flatpickr-calendar.arrowTop {
-  @apply before:border-b-slate-150 after:border-b-slate-150 dark:before:border-b-navy-500 dark:after:border-b-navy-500;
+  @apply before:border-b-slate-150 after:border-b-slate-150 dark:after:border-b-navy-500 dark:before:border-b-navy-500;
 }
 
+.flatpickr-calendar.arrowBottom,
 .flatpickr-calendar.arrowBottom {
-  @apply before:border-t-slate-150 after:border-t-slate-150 dark:before:border-t-navy-700 dark:after:border-t-navy-700;
+  @apply before:border-t-slate-150 after:border-t-slate-150 dark:after:border-t-navy-700 dark:before:border-t-navy-700;
 }
 
 .flatpickr-current-month input.cur-year[disabled],

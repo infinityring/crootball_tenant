@@ -1,0 +1,26 @@
+---
+import TenantTeam from "@/layouts/TenantTeam.astro";
+import ResumeCard from "@/components/teams/ResumeCard.astro";
+import RosterCard from "@/components/teams/RosterCard.astro";
+import FacilitiesCard from "@/components/teams/FacilitiesCard.astro";
+import MatchesCard from "@/components/matches/MatchesCard.astro";
+
+const _team = {
+  name: "RCD Mallorca",
+  slug: "rcd-mallorca",
+  manager : {
+    name: "Manager 1",
+    slug: "manager-1",
+  }
+};
+---
+
+<TenantTeam>
+  <h1>Team {_team.name}</h1>
+  <div class="flex flex-col space-y-4">
+  <ResumeCard></ResumeCard>
+  <FacilitiesCard team={_team}></FacilitiesCard>
+  <MatchesCard></MatchesCard>
+  <RosterCard></RosterCard>
+  </div>
+</TenantTeam>

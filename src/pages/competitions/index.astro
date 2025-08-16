@@ -1,0 +1,204 @@
+---
+import CompetitionCard from "@/components/competitions/CompetitionCard.astro";
+import TenantUser from "@/layouts/TenantUser.astro";
+import SearchPanel from "@/components/ui/alpine/SearchPanel.astro";
+import SearchResults from "@/components/ui/alpine/SearchResults.astro";
+import Textbox from "@/components/ui/alpine/Textbox.astro";
+import Button from "@/components/ui/alpine/Button.astro";
+import Card from "@/components/ui/Card.astro";
+
+const _team = {
+  name: "RCD Mallorca",
+  slug: "rcd-mallorca",
+};
+
+const competitions = [
+  {
+    id: 1,
+    name: "Champions League",
+    prestige : 100,
+    status: "Quarters",
+    teams: 16,
+    season : 24,
+    slug: "champion-league",
+    logo: "/images/800x800.png",
+  },
+  {
+    id: 1,
+    name: "Europa League",
+    prestige : 80,
+    status: "Quarters",
+    teams: 16,
+    slug: "europa-league",
+    logo: "/images/800x800.png",
+  },
+  {
+    id: 1,
+    name: "Europa Conference League",
+    prestige : 30,
+    status: "Quarters",
+    teams: 16,
+    season : 24,
+    slug: "europa-conference-league",
+    logo: "/images/800x800.png",
+  },
+  {
+    id: 1,
+    name: "La Liga",
+    prestige : 50,
+    status: "13a Giornata",
+    teams: 16,
+    season : 24,
+    slug: "la-liga",
+    logo: "/images/800x800.png",
+  },
+  {
+    id: 1,
+    name: "Serie A",
+    prestige : 50,
+    status: "13a Giornata",
+    teams: 16,
+    season : 24,
+    slug: "serie-a",
+    logo: "/images/800x800.png",
+  },
+  {
+    id: 1,
+    name: "Premier League",
+    prestige : 50,
+    status: "13a Giornata",
+    teams: 16,
+    season : 24,
+    slug: "la-liga",
+    logo: "/images/800x800.png",
+  },
+  {
+    id: 1,
+    name: "Ligue 1",
+    prestige : 50,
+    status: "13a Giornata",
+    teams: 16,
+    season : 24,
+    slug: "ligue-1",
+    logo: "/images/800x800.png",
+  },
+  {
+    id: 1,
+    name: "Copa Del Rey",
+    prestige : 30,
+    status: "Quarters",
+    teams: 16,
+    season : 24,
+    slug: "copa-del-rey",
+    logo: "/images/800x800.png",
+  },
+  {
+    id: 1,
+    name: "Coppa Italia",
+    prestige : 30,
+    status: "Quarters",
+    teams: 16,
+    season : 24,
+    slug: "copa-italia",
+    logo: "/images/800x800.png",
+  },
+  {
+    id: 1,
+    name: "FA Cup",
+    prestige : 30,
+    status: "Quarters",
+    teams: 16,
+    season : 24,
+    slug: "fa-cup",
+    logo: "/images/800x800.png",
+  },
+  {
+    id: 1,
+    name: "Tropee de Champion",
+    prestige : 30,
+    status: "Quarters",
+    teams: 16,
+    season : 24,
+    slug: "tropee-de-champion",
+    logo: "/images/800x800.png",
+  },
+
+  {
+    id: 1,
+    name: "Super Cup",
+    prestige : 20,
+    status: "Final",
+    teams: 2,
+    season : 24,
+    slug: "super-cup",
+    logo: "/images/800x800.png",
+  },
+  {
+    id: 1,
+    name: "FA Community Shield",
+    prestige : 20,
+    status: "Final",
+    teams: 2,
+    season : 24,
+    slug: "fa-community-shield",
+    logo: "/images/800x800.png",
+  },
+  {
+    id: 1,
+    name: "Trophee des Champions",
+    prestige : 20,
+    status: "Final",
+    teams: 2,
+    season : 24,
+    slug: "trophee-des-champions",
+    logo: "/images/800x800.png",
+  },
+  {
+    id: 1,
+    name: "Supercoppa Italiana",
+    prestige : 20,
+    status: "Final",
+    teams: 2,
+    season : 24,
+    slug: "supercoppa-italiana",
+    logo: "/images/800x800.png",
+  },
+  {
+    id: 1,
+    name: "Supercopa de España",
+    prestige : 20,
+    status: "Final",
+    teams: 2,
+    season : 24,
+    slug: "supercopa-de-espana",
+    logo: "/images/800x800.png",
+  }
+];
+---
+
+<TenantUser>
+  <h1>Competitions</h1>
+  <Card>
+  <SearchPanel event="doSearch" data="searchFormData">
+    <Textbox
+      label="Season"
+      model="searchFormData.fromTeam"
+      placeholder="24"
+    />
+    <Textbox
+      label="Competition"
+      model="searchFormData.toTeam"
+      placeholder="Searie A"
+    />
+    <Button label="Search" onClick="doSearch" />
+  </SearchPanel>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-2">
+    {
+      competitions.map((competition) => (
+        <CompetitionCard competition={competition} link={`/competitions/${competition.slug}`} />
+      ))
+    }
+  </div>
+</Card>
+</TenantUser> 

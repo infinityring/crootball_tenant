@@ -1,4 +1,4 @@
-import Accordion from "accordion-js";
+
 import SimpleBar from "simplebar";
 import dayjs from "dayjs";
 
@@ -34,7 +34,7 @@ window.Tab = Tab;
 window.Modal = Modal;
 window.Drawer = Drawer;
 
-window.Accordion = Accordion;
+
 window.SimpleBar = SimpleBar;
 window.dayjs = dayjs;
 window.tooltip = tooltip;

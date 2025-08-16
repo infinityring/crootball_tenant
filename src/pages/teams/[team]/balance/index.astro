@@ -1,0 +1,22 @@
+---
+import TenantTeam from "@/layouts/TenantTeam.astro";
+import TransactionsHistoryCard from "@/components/balance/TransactionsHistoryCard.astro";
+import ChartSeason from "@/components/balance/ChartSeason.astro";
+import ChartIncome from "@/components/balance/ChartIncome.astro";
+import ChartExpenses from "@/components/balance/ChartExpenses.astro";
+
+const _team = {
+  name: "RCD Mallorca",
+  slug: "rcd-mallorca",
+};
+---
+
+<TenantTeam>
+  <h1>Team {_team.name} Balances</h1>
+  <div class="flex flex-col space-y-4">
+    <ChartSeason chartId="chartSeasons"/>
+    <ChartIncome chartId="chartIncomeType"/>
+    <ChartExpenses chartId="chartExpensesType"/>
+    <TransactionsHistoryCard/>
+  </div>
+</TenantTeam>

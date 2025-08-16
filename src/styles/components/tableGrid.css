@@ -7,7 +7,7 @@
 }
 
 th.gridjs-th .gridjs-th-content {
-  @apply float-left overflow-ellipsis overflow-hidden;
+  @apply float-left text-ellipsis overflow-hidden;
 }
 
 .gridjs-table .gridjs-th {

@@ -1,0 +1,75 @@
+---
+import Card from "@/components/ui/Card.astro";
+import Table from "@/components/ui/Table.astro";
+import TableHeaderCell from "@/components/ui/TableHeaderCell.astro";
+import TableRow from "@/components/ui/TableRow.astro";
+import TableBodyCell from "@/components/ui/TableBodyCell.astro";
+import SearchPanel from "@/components/ui/alpine/SearchPanel.astro";
+import Textbox from "@/components/ui/alpine/Textbox.astro";
+import Button from "@/components/ui/alpine/Button.astro";
+
+
+const staff = [
+    {
+        name: "Manager",
+        role: "Manager",
+        expense: "500000",
+        contractsEnds: "2025",
+    },
+    {
+        name: "Physiotherapist",
+        role: "Physiotherapist",
+        expense: "200000",
+        contractsEnds: "2025",
+    },
+    {
+        name: "Physiotherapist Assistant",
+        role: "Physiotherapist Assistant",
+        expense: "150000",
+        contractsEnds: "2025",
+    },
+    {
+        name: "Trainer",
+        role: "Trainer",
+        expense: "100000",
+        contractsEnds: "2025",
+    },
+    {
+        name: "Fitness Coach",
+        role: "Fitness Coach",
+        expense: "100000",
+        contractsEnds: "2025",
+    }
+
+]
+---
+
+<Card>
+    <h2>Staff</h2>
+    <Table>
+        <thead slot="head">
+            <TableHeaderCell>Naem</TableHeaderCell>
+            <TableHeaderCell>Role</TableHeaderCell>
+            <TableHeaderCell>Expense</TableHeaderCell>
+            <TableHeaderCell>Contracts Ends</TableHeaderCell>
+            <TableHeaderCell>Dismiss</TableHeaderCell>
+        </thead>
+
+        <tbody slot="body">
+            {
+                staff.map((person) => (
+                    <TableRow>
+                        <TableBodyCell>{person.name}</TableBodyCell>
+                        <TableBodyCell>{person.role}</TableBodyCell>
+                        <TableBodyCell>{person.expense}</TableBodyCell>
+                        <TableBodyCell>{person.contractsEnds}</TableBodyCell>
+                        <TableBodyCell>
+                            <Button label="Dismiss" />
+                            <Button label="Renew Contract" />
+                        </TableBodyCell>
+                    </TableRow>
+                ))
+            }
+        </tbody>
+    </Table>
+</Card>

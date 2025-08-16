@@ -1,9 +1,25 @@
-<!-- Dark Mode Toggle -->
-<a class="darkmode-toggle w-6 h-6">
-    <div class="material-icons text-slate-800 dark:text-navy-100 darkmode-moon"
-        >dark_mode</div
+<button
+    x-data
+    @click="$store.global.isDarkModeEnabled = !$store.global.isDarkModeEnabled"
+    class="btn size-8 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25"
+>
+    <div
+        x-show="$store.global.isDarkModeEnabled"
+        x-transition:enter="transition-transform duration-200 ease-out absolute origin-top"
+        x-transition:enter-start="scale-75"
+        x-transition:enter-end="scale-100 static"
+        class="material-icons text-slate-800 dark:text-navy-100 darkmode-moon"
     >
-    <div class="material-icons text-slate-800 dark:text-navy-100 darkmode-sun"
-        >light_mode</div
+        dark_mode
+    </div>
+
+    <div
+        x-show="!$store.global.isDarkModeEnabled"
+        x-transition:enter="transition-transform duration-200 ease-out absolute origin-top"
+        x-transition:enter-start="scale-75"
+        x-transition:enter-end="scale-100 static"
+        class="material-icons text-slate-800 dark:text-navy-100 darkmode-sun"
     >
-</a>
+        light_mode
+    </div>
+</button>

@@ -1,0 +1,246 @@
+---
+import TenantTeam from "@/layouts/TenantTeam.astro";
+import Card from "@/components/ui/Card.astro";
+import Table from "@/components/ui/Table.astro";
+import TableHeaderCell from "@/components/ui/TableHeaderCell.astro";
+import TableRow from "@/components/ui/TableRow.astro";
+import TableBodyCell from "@/components/ui/TableBodyCell.astro";
+import Button from "@/components/ui/alpine/Button.astro";
+
+const _team = {
+  name: "RCD Mallorca",
+  slug: "rcd-mallorca",
+};
+
+const formations = [
+
+  { name: "4-4-2 ",id : "1"},
+  { name: "4-3-3 ",id : "2"},
+  { name: "3-5-2 ",id : "3"},
+
+
+]
+
+const pinpoints = [
+
+
+    { id: "1", positions: ["RWF"] },
+    { id: "2", positions: ["ST","SS"] },
+    { id: "3", positions: ["ST","SS"] },
+    { id: "4", positions: ["ST","SS"] },
+    { id: "5", positions: ["LWF"] },
+
+    { id: "6", positions: ["RMF","RWF"] },
+    { id: "7", positions: ["SS","AMF"] },
+    { id: "8", positions: ["SS","AMF"] },
+    { id: "9", positions: ["SS","AMF"] },
+    { id: "10", positions: ["LWF","LMF"] },
+
+
+    { id: "11", positions: ["RMF"] },
+    { id: "12", positions: ["AMF","CMF"] },
+    { id: "13", positions: ["AMF","CMF"] },
+    { id: "14", positions: ["AMF","CMF"] },
+    { id: "15", positions: ["LMF"] },
+    
+    { id: "16", positions: ["RMF"] },
+    { id: "17", positions: ["CMF","DMF","AMF"] },
+    { id: "18", positions: ["CMF","DMF","AMF"] },
+    { id: "19", positions: ["CMF","DMF","AMF"] },
+    { id: "20", positions: ["LMF"] },
+
+    { id: "21", positions: ["RB","LMF"] },
+    { id: "22", positions: ["DMF","CMF"] },
+    { id: "23", positions: ["DMF","CMF"] },
+    { id: "24", positions: ["DMF","CMF"] },
+    { id: "25", positions: ["LB","RMF"] },
+
+
+    { id: "26", positions: ["RB"] },
+    { id: "27", positions: ["CB"] },
+    { id: "28", positions: ["CB"] },
+    { id: "29", positions: ["CB"] },
+    { id: "30", positions: ["LB"] },
+
+
+    { id: "31", positions: [] },
+    { id: "32", positions: [] },
+    { id: "33", positions: ["GK"] },
+    { id: "34", positions: [] },
+    { id: "35", positions: [] },
+
+];
+
+
+const formation = [
+  { player : "Player 1", image: "/images/200x200.png", position: "GK", rating: 80, location: "33"},
+  { player : "Player 2", image: "/images/200x200.png", position: "RB", rating: 80, location: "26"},
+  { player : "Player 3", image: "/images/200x200.png", position: "LB", rating: 80, location: "30"},
+  { player : "Player 4", image: "/images/200x200.png", position: "DC", rating: 80, location: "27"},
+  { player : "Player 5", image: "/images/200x200.png", position: "DC", rating: 80, location: "29"},
+  { player : "Player 6", image: "/images/200x200.png", position: "DMF", rating: 80, location: "23"},
+  { player : "Player 7", image: "/images/200x200.png", position: "CC", rating: 80, location: "12"},
+  { player : "Player 8", image: "/images/200x200.png", position: "AMF", rating: 80, location: "14"},
+  { player : "Player 9", image: "/images/200x200.png", position: "LWF", rating: 80, location: "10"},
+  { player : "Player 10", image: "/images/200x200.png", position: "RWF", rating: 80, location: "6"},
+  { player : "Player 11", image: "/images/200x200.png", position: "ST", rating: 80, location: "3"},
+]
+
+const bench = [
+{ player : "Player 13", image: "/images/200x200.png", position: "GK", rating: 80, location: "33"},
+  { player : "Player 14", image: "/images/200x200.png", position: "RB", rating: 80, location: "26"},
+  { player : "Player 15", image: "/images/200x200.png", position: "LB", rating: 80, location: "30"},
+  { player : "Player 16", image: "/images/200x200.png", position: "DC", rating: 80, location: "27"},
+  { player : "Player 17", image: "/images/200x200.png", position: "DC", rating: 80, location: "29"},
+  { player : "Player 18", image: "/images/200x200.png", position: "DMF", rating: 80, location: "23"},
+  { player : "Player 19", image: "/images/200x200.png", position: "CC", rating: 80, location: "12"},
+
+]
+
+---
+<script>
+ import { toPng } from 'html-to-image';
+
+window.exportDivAsPng=  async function () {
+    const node = document.getElementById('pitch');
+    if (!node) return;
+    // Optional: increase quality/scale
+    const dataUrl = await toPng(node, { cacheBust: true, pixelRatio: 2 });
+    const link = document.createElement('a');
+    link.download = 'formation.png';
+    link.href = dataUrl;
+    link.click();
+  }
+
+</script>
+
+<TenantTeam>
+  <h1>Team {_team.name} Formations</h1>
+  <div class="flex flex-col space-y-4 w-4xl mx-auto" x-data="{}">
+    
+    <Card>
+      <h2>Available Formations</h2>
+
+      <Table>
+        <thead slot="head">
+          <TableHeaderCell>Action</TableHeaderCell>
+          <TableHeaderCell>Name</TableHeaderCell>
+        </thead>
+        <tbody slot="body">
+          {
+            formations.map((formation) => (
+              <TableRow>
+                <TableBodyCell>{formation.name}</TableBodyCell>
+                <TableBodyCell>
+                  <Button label="Edit" />
+                  <Button label="Delete"  />
+                </TableBodyCell>
+              </TableRow>
+            ))
+          }
+        </tbody>
+      </Table>
+    </Card>
+
+    <Card>
+      <div class="flex justify-between">
+        <h2>Formation Builder</h2>
+        <Button label="Share" onClick="exportDivAsPng()"/>
+      </div>
+      <div class="flex" id="pitch">
+
+
+
+        <div class="w-2/3 aspect-[3/4] relative rounded-lg border border-emerald-900 shadow-lg overflow-hidden">
+          {/* pitch stripes */}
+          <div
+              class="absolute inset-0"
+              style="background-image: repeating-linear-gradient(0deg, #0f4d2a 0 28px, #146c3c 28px 56px);"
+          >
+          </div>
+      
+          {/* outer margin line */}
+          <div class="absolute inset-1 rounded-md ring-2 ring-emerald-200/70"></div>
+      
+          {/* center circle */}
+          <div
+              class="absolute inset-0 flex items-center justify-center pointer-events-none"
+          >
+              <div class="w-28 h-28 rounded-full ring-2 ring-emerald-200/80"></div>
+          </div>
+      
+          {/* midline */}
+          <div
+              class="absolute inset-x-2 top-1/2 -translate-y-1/2 h-[2px] bg-emerald-200/80"
+          >
+          </div>
+      
+          {/* penalty boxes */}
+          <div
+              class="absolute left-1/2 -translate-x-1/2 top-2 w-32 h-16 rounded-b-lg ring-2 ring-emerald-200/80"
+          >
+          </div>
+          <div
+              class="absolute left-1/2 -translate-x-1/2 bottom-2 w-32 h-16 rounded-t-lg ring-2 ring-emerald-200/80"
+          >
+          </div>
+      
+          {/* small goal boxes */}
+          <div
+              class="absolute left-1/2 -translate-x-1/2 top-2.5 w-20 h-8 rounded-b-md ring-2 ring-emerald-200/80 bg-black/40"
+          >
+          </div>
+          <div
+              class="absolute left-1/2 -translate-x-1/2 bottom-2.5 w-20 h-8 rounded-t-md ring-2 ring-emerald-200/80 bg-black/40"
+          >
+          </div>
+      
+          {/* rating chips */}
+          <div class="absolute inset-2 grid grid-flow-row grid-cols-5 gap-2">
+              {
+                  pinpoints.map((p, index) => (
+                      <div class="relative flex items-center justify-center">
+                          {p.positions.length > 0 && (
+                            <div class="flex flex-col items-center justify-center">
+                            <!-- span class="text-[10px] px-1 rounded-sm bg-black/70 text-yellow-300 font-semibold tracking-wide">{p.positions[0] + " " + p.id}</span> -->
+                            {
+                              formation.find((f) => f.location === p.id) && (
+                              <div class="flex flex-col items-center justify-center text-[10px] px-1 rounded-sm bg-black/70 text-yellow-300 font-semibold tracking-wide">
+                                <img
+                                  src={formation.find((f) => f.location === p.id)?.image}
+                                  alt={formation.find((f) => f.location === p.id)?.player}
+                                  class="w-10 h-10 rounded-full"
+                                />
+                                <span>{formation.find((f) => f.location === p.id)?.player}</span>
+                                <span>{formation.find((f) => f.location === p.id)?.position} ({formation.find((f) => f.location === p.id)?.rating})</span>
+                              </div>
+                              )
+                            }
+                            </div>
+                          )}
+                      </div>
+                  ))
+              }
+          </div>
+        </div>
+
+        <div class="w-1/3 flex flex-col items-center justify-start">
+          <h2>Bench</h2>
+          {
+            bench.map((player) => (
+              <div class="flex flex-col items-center justify-center text-[10px]">
+                <img
+                  src={player.image}
+                  alt={player.player}
+                  class="w-10 h-10 rounded-full"
+                />
+                <span>{player.player}</span>
+                <span>{player.position} ({player.rating})</span>
+              </div>
+            ))
+          }
+        </div>
+      </div>  
+    </Card>
+  </div>
+</TenantTeam>

@@ -3019,6 +3019,51 @@ export type TenantsGetByTokenResponses = {
 
 export type TenantsGetByTokenResponse = TenantsGetByTokenResponses[keyof TenantsGetByTokenResponses];
 
+export type TenantsGetTokensData = {
+    body?: never;
+    path: {
+        /**
+         * Tenant unique identifier
+         */
+        id: number;
+    };
+    query?: never;
+    url: '/api/tenants/{id}/tokens';
+};
+
+export type TenantsGetTokensErrors = {
+    /**
+     * Default Response
+     */
+    400: {
+        /**
+         * Status code
+         */
+        statusCode?: number;
+        /**
+         * Error message
+         */
+        message?: string;
+        /**
+         * Short rror message
+         */
+        error?: string;
+    };
+};
+
+export type TenantsGetTokensError = TenantsGetTokensErrors[keyof TenantsGetTokensErrors];
+
+export type TenantsGetTokensResponses = {
+    /**
+     * Generic JSON response
+     */
+    200: {
+        [key: string]: unknown;
+    };
+};
+
+export type TenantsGetTokensResponse = TenantsGetTokensResponses[keyof TenantsGetTokensResponses];
+
 export type DeleteApiTokensData = {
     body?: never;
     path?: never;
@@ -3219,6 +3264,86 @@ export type ToolsExportPlayersDataResponses = {
 };
 
 export type ToolsExportPlayersDataResponse = ToolsExportPlayersDataResponses[keyof ToolsExportPlayersDataResponses];
+
+export type ToolsImportPlayersListData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/api/tools/importPlayersList';
+};
+
+export type ToolsImportPlayersListErrors = {
+    /**
+     * Default Response
+     */
+    400: {
+        /**
+         * Status code
+         */
+        statusCode?: number;
+        /**
+         * Error message
+         */
+        message?: string;
+        /**
+         * Short rror message
+         */
+        error?: string;
+    };
+};
+
+export type ToolsImportPlayersListError = ToolsImportPlayersListErrors[keyof ToolsImportPlayersListErrors];
+
+export type ToolsImportPlayersListResponses = {
+    /**
+     * Generic JSON response
+     */
+    200: {
+        [key: string]: unknown;
+    };
+};
+
+export type ToolsImportPlayersListResponse = ToolsImportPlayersListResponses[keyof ToolsImportPlayersListResponses];
+
+export type ToolsImportPlayersPesDataData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/api/tools/importPlayersPesData';
+};
+
+export type ToolsImportPlayersPesDataErrors = {
+    /**
+     * Default Response
+     */
+    400: {
+        /**
+         * Status code
+         */
+        statusCode?: number;
+        /**
+         * Error message
+         */
+        message?: string;
+        /**
+         * Short rror message
+         */
+        error?: string;
+    };
+};
+
+export type ToolsImportPlayersPesDataError = ToolsImportPlayersPesDataErrors[keyof ToolsImportPlayersPesDataErrors];
+
+export type ToolsImportPlayersPesDataResponses = {
+    /**
+     * Generic JSON response
+     */
+    200: {
+        [key: string]: unknown;
+    };
+};
+
+export type ToolsImportPlayersPesDataResponse = ToolsImportPlayersPesDataResponses[keyof ToolsImportPlayersPesDataResponses];
 
 export type ToolsTmDataGetPlayerData = {
     body?: never;
@@ -3858,16 +3983,16 @@ export type UsersJoinTenantResponses = {
     200: unknown;
 };
 
-export type UsersGetOwnedTenantsData = {
+export type UsersGetTeamsData = {
     body?: never;
     path: {
         id: string;
     };
     query?: never;
-    url: '/api/users/{id}/ownedTenants';
+    url: '/api/users/{id}/teams';
 };
 
-export type UsersGetOwnedTenantsErrors = {
+export type UsersGetTeamsErrors = {
     /**
      * Default Response
      */
@@ -3887,9 +4012,9 @@ export type UsersGetOwnedTenantsErrors = {
     };
 };
 
-export type UsersGetOwnedTenantsError = UsersGetOwnedTenantsErrors[keyof UsersGetOwnedTenantsErrors];
+export type UsersGetTeamsError = UsersGetTeamsErrors[keyof UsersGetTeamsErrors];
 
-export type UsersGetOwnedTenantsResponses = {
+export type UsersGetTeamsResponses = {
     /**
      * Generic JSON response
      */
@@ -3898,18 +4023,18 @@ export type UsersGetOwnedTenantsResponses = {
     };
 };
 
-export type UsersGetOwnedTenantsResponse = UsersGetOwnedTenantsResponses[keyof UsersGetOwnedTenantsResponses];
+export type UsersGetTeamsResponse = UsersGetTeamsResponses[keyof UsersGetTeamsResponses];
 
-export type UsersGetOwnedTeamsData = {
+export type UsersGetTenantsData = {
     body?: never;
     path: {
         id: string;
     };
     query?: never;
-    url: '/api/users/{id}/ownedTeams';
+    url: '/api/users/{id}/tenants';
 };
 
-export type UsersGetOwnedTeamsErrors = {
+export type UsersGetTenantsErrors = {
     /**
      * Default Response
      */
@@ -3929,9 +4054,9 @@ export type UsersGetOwnedTeamsErrors = {
     };
 };
 
-export type UsersGetOwnedTeamsError = UsersGetOwnedTeamsErrors[keyof UsersGetOwnedTeamsErrors];
+export type UsersGetTenantsError = UsersGetTenantsErrors[keyof UsersGetTenantsErrors];
 
-export type UsersGetOwnedTeamsResponses = {
+export type UsersGetTenantsResponses = {
     /**
      * Generic JSON response
      */
@@ -3940,7 +4065,7 @@ export type UsersGetOwnedTeamsResponses = {
     };
 };
 
-export type UsersGetOwnedTeamsResponse = UsersGetOwnedTeamsResponses[keyof UsersGetOwnedTeamsResponses];
+export type UsersGetTenantsResponse = UsersGetTenantsResponses[keyof UsersGetTenantsResponses];
 
 export type ClientOptions = {
     baseUrl: 'http://localhost:3000' | (string & {});

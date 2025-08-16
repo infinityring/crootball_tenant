@@ -1,0 +1,10 @@
+---
+import TenantUser from "@/layouts/TenantUser.astro";
+
+const tenant = Astro.locals.tenant;
+const user = Astro.locals.user
+const team = Astro.locals.team
+---
+<TenantUser>
+    <h1>{user.name} Search</h1>
+</TenantUser>

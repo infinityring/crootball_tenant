@@ -1,0 +1,52 @@
+---
+import Chart from "../ui/alpine/Chart.astro";
+
+const {chartId, playerId } = Astro.props;
+
+
+const _chartId = chartId ? chartId : "chartSeasons";
+const configuration = {
+    chart: {
+      type: "bar",
+      zoom: {
+        enabled: false,
+      },
+      toolbar: {
+        tools: {
+          download: false,
+        },
+      },
+    },
+    series: [
+      {
+        name: "Market Value",
+        data: [
+          { x: "Season 23", y: 83 },
+          { x: "Season 25", y: 65 },
+          { x: "Season 26", y: 90 },
+          { x: "Season 27", y: 80 },
+          { x: "Season 28", y: 75 },
+        ],
+      },
+    ],
+    xaxis: {
+      type: "category",
+    },
+    yaxis: {
+      labels: {
+        formatter: (val) => val.toFixed(2) + " mln €",
+      },
+    },
+    tooltip: {
+      x: {
+        format: "dd/MM/yyyy",
+      },
+      y: {
+        formatter: (val) => val.toFixed(2) + " mln €",
+      },
+    },
+  };
+
+---
+
+<Chart chartId={_chartId} configuration={configuration}></Chart>

@@ -1,0 +1,18 @@
+---
+import TenantTeam from "@/layouts/TenantTeam.astro";
+import StaffCard from "@/components/facilities/StaffCard.astro";
+import FacilitiesCard from "@/components/facilities/FacilitiesCard.astro";
+import OperationsHistoryCard from "@/components/facilities/OperationsHistoryCard.astro";
+
+const _team = {
+  name: "RCD Mallorca",
+  slug: "rcd-mallorca",
+};
+---
+
+<TenantTeam>
+  <h1>Facility Description</h1>
+
+  <a class="btn bg-primary text-white" href={`/teams/${_team.slug}/facilities/shop`}>Buy</a> 
+
+</TenantTeam>

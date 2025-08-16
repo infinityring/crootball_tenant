@@ -1,0 +1,26 @@
+---
+import Chart from "../ui/alpine/Chart.astro";
+
+const {chartId, playerId } = Astro.props;
+
+const configuration = {
+    chart: {
+      type: 'pie',
+    },
+    series: [100, 50, 20],
+    labels: ["TRANSFER", "MARKETING", "TIKETS"],
+    tooltip: {
+      y: {
+        formatter: function(val) {
+          return "$ " + val + " thousands"
+        }
+      }
+    },
+    fill: {
+      opacity: 0.9,
+    },
+  };
+
+---
+
+<Chart chartId={chartId} configuration={configuration}></Chart>

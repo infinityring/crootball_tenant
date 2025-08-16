@@ -1,0 +1,19 @@
+---
+const { player }= Astro.props;
+
+const baseUrl = `/players/${player.slug}`;
+
+
+const avaliableOperations = [
+    { label : "Renew Contract", link: `/operations/renewContract/${player.slug}`},
+    { label : "Terminate Contract", link: `/operations/terminate/${player.slug}`},
+    { label : "Add to Transfer list", link: `/operations/addToTransferList/${player.slug}`},
+    { label : "Make an offer", link: `/operations/makeOffer/${player.slug}`},
+];
+
+---
+
+
+{avaliableOperations.map((operation) => (
+    <a class="btn bg-primary text-white" href={operation.link}>{operation.label}</a>
+))}

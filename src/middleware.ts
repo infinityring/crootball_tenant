@@ -73,8 +73,8 @@ const sessionManager: MiddlewareHandler = async (context, next) => {
 
 const teamManager: MiddlewareHandler = async (context, next) => {
   if (!context.locals.userid) return next()
-  const { data: userTeam } = await crootballClient.usersGetOwnedTeams({ path: { id: context.locals.user.id } });
-  context.locals.team = userTeam?.team
+  const { data: userTeam } = await crootballClient.usersGetTeams({ path: { id: context.locals.user.id } });
+  context.locals.team = userTeam?.contracts?.length > 0 ? userTeam?.contracts[0].team : null
   return next();
 }
 

@@ -1,0 +1,371 @@
+---
+import TenantUser from "@/layouts/TenantUser.astro";
+import Card from "@/components/ui/Card.astro";
+import LastMatchesCard from "@/components/players/LastMatchesCard.astro";
+import StatsCard from "@/components/players/StatsCard.astro";
+import TransferHistoryCard from "@/components/players/TransferHistoryCard.astro";
+import AttributesCard from "@/components/players/AttributesCard.astro";
+import SummaryCard from "@/components/players/SummaryCard.astro";
+import PositionsCard from "@/components/players/PositionsCard.astro";
+import ChartStats from "@/components/players/ChartStats.astro";
+import ChartValue from "@/components/players/ChartValue.astro";
+import ChartWage from "@/components/players/ChartWage.astro";
+import Operations from "@/components/players/Operations.astro";
+
+const attributeConfig = [
+  { csv: "PlayerName", json: "pdb_name", type: "string" },
+  { csv: "PlayerID", json: "pdbid", type: "int" },
+  { csv: "ClubID", json: "clubId", type: "int" },
+  { csv: "OwnerClub", json: "ownerClub", type: "int" },
+  { csv: "Age", json: "pdbage", type: "int", from: 14, to: 55 },
+  { csv: "PlayingStyles", json: "playingStyles", type: "int" },
+  { csv: "MarketValue", json: "marketValue", type: "int" },
+  { csv: "GoalCelebration", json: "goalCelebration", type: "int" },
+  { csv: "PenaltyKick", json: "penaltyKick", type: "int", from: 0, to: 20 },
+  { csv: "Nationality1", json: "nationality1", type: "int" },
+  { csv: "Nationality2", json: "nationality2", type: "int" },
+  { csv: "Reputation", json: "reputation", type: "int", from: 1, to: 8 },
+  { csv: "Position", json: "position", type: "int" },
+  //{ csv: 'CornerKick', json: 'cornerKick', type: 'int', from: 0, to: 99 },
+  {
+    csv: "RunningHunching",
+    json: "runningHunching",
+    type: "int",
+    from: 0,
+    to: 20,
+  },
+  {
+    csv: "DribblingHunching",
+    json: "dribblingHunching",
+    type: "int",
+    from: 0,
+    to: 20,
+  },
+  {
+    csv: "RunningArmMovement",
+    json: "runningArmMovement",
+    type: "int",
+    from: 0,
+    to: 20,
+  },
+  {
+    csv: "DribblingArmMovement",
+    json: "dribblingArmMovement",
+    type: "int",
+    from: 0,
+    to: 20,
+  },
+  { csv: "Form", json: "form", type: "int", from: 0, to: 8 },
+  {
+    csv: "WeakFootAccuracy",
+    json: "weakFootAccuracy",
+    type: "int",
+    from: 0,
+    to: 4,
+  },
+  {
+    csv: "InjuryResistance",
+    json: "injuryResistance",
+    type: "int",
+    from: 0,
+    to: 3,
+  },
+  { csv: "Weight", json: "weight", type: "int", from: 40, to: 120 },
+  { csv: "Height", json: "height", type: "int", from: 150, to: 210 },
+  {
+    csv: "SetPieceTaking",
+    json: "setPieceTaking",
+    type: "int",
+    from: 40,
+    to: 99,
+  },
+  { csv: "Heading", json: "heading", type: "int", from: 40, to: 99 },
+  { csv: "BallControl", json: "ballControl", type: "int", from: 40, to: 99 },
+  {
+    csv: "DefensiveAwareness",
+    json: "defensiveAwareness",
+    type: "int",
+    from: 40,
+    to: 99,
+  },
+  { csv: "KickingPower", json: "kickingPower", type: "int", from: 40, to: 99 },
+  { csv: "GKParrying", json: "gkParrying", type: "int", from: 40, to: 99 },
+  { csv: "Tackling", json: "tackling", type: "int", from: 40, to: 99 },
+  { csv: "Speed", json: "speed", type: "int", from: 40, to: 99 },
+  { csv: "GKReach", json: "gkReach", type: "int", from: 40, to: 99 },
+  { csv: "GKCatching", json: "gkCatching", type: "int", from: 40, to: 99 },
+  { csv: "Jump", json: "jump", type: "int", from: 40, to: 99 },
+  { csv: "Acceleration", json: "acceleration", type: "int", from: 40, to: 99 },
+  { csv: "Stamina", json: "stamina", type: "int", from: 40, to: 99 },
+  { csv: "Curl", json: "curl", type: "int", from: 40, to: 99 },
+  { csv: "GKAwareness", json: "gkAwareness", type: "int", from: 40, to: 99 },
+  { csv: "GKReflexes", json: "gkReflexes", type: "int", from: 40, to: 99 },
+  //{ csv: 'PlayingAttitude', json: 'playingAttitude', type: 'int', from: 0, to: 2 },
+  {
+    csv: "PhysicalContact",
+    json: "physicalContact",
+    type: "int",
+    from: 40,
+    to: 99,
+  },
+  { csv: "Aggression", json: "aggression", type: "int", from: 40, to: 99 },
+  { csv: "Balance", json: "balance", type: "int", from: 40, to: 99 },
+  {
+    csv: "OffensiveAwareness",
+    json: "offensiveAwareness",
+    type: "int",
+    from: 40,
+    to: 99,
+  },
+  { csv: "Dribbling", json: "dribbling", type: "int", from: 40, to: 99 },
+  { csv: "WeakFootUsage", json: "weakFootUsage", type: "int", from: 0, to: 4 },
+  {
+    csv: "DefensiveEngagement",
+    json: "defensiveEngagement",
+    type: "int",
+    from: 40,
+    to: 99,
+  },
+  { csv: "lofted_pass", json: "loftedPass", type: "int", from: 40, to: 99 },
+  { csv: "Finishing", json: "finishing", type: "int", from: 40, to: 99 },
+  { csv: "LowPass", json: "lowPass", type: "int", from: 40, to: 99 },
+  {
+    csv: "TightPossession",
+    json: "tightPossession",
+    type: "int",
+    from: 40,
+    to: 99,
+  },
+
+  // Boolean skills
+  { csv: "AerialFort", json: "aerialFort", type: "bool" },
+  { csv: "ChopTurn", json: "chopTurn", type: "bool" },
+  { csv: "EarlyCross", json: "earlyCross", type: "bool" },
+  { csv: "PinpointCrossing", json: "pinpointCrossing", type: "bool" },
+  { csv: "Sombrero", json: "sombrero", type: "bool" },
+  { csv: "BlitzCurler", json: "blitzCurler", type: "bool" },
+  { csv: "LongRange", json: "longRange", type: "bool" },
+  { csv: "OnetouchPass", json: "onetouchPass", type: "bool" },
+  { csv: "MomentumDribbling", json: "momentumDribbling", type: "bool" },
+  { csv: "GameChangingPass", json: "gameChangingPass", type: "bool" },
+  { csv: "AerialSuperiority", json: "aerialSuperiority", type: "bool" },
+  { csv: "ChipShotControl", json: "chipShotControl", type: "bool" },
+  { csv: "HeelTrick", json: "heelTrick", type: "bool" },
+  { csv: "ManMarking", json: "manMarking", type: "bool" },
+  { csv: "PhenomenalPass", json: "phenomenalPass", type: "bool" },
+  { csv: "Interception", json: "interception", type: "bool" },
+  { csv: "SlidingTackle", json: "slidingTackle", type: "bool" },
+  { csv: "GKPenaltySaver", json: "gkPenaltySaver", type: "bool" },
+  { csv: "AccelerationBurst", json: "accelerationBurst", type: "bool" },
+  { csv: "SoleControl", json: "soleControl", type: "bool" },
+  { csv: "RisingShots", json: "risingShots", type: "bool" },
+  { csv: "MarseilleTurn", json: "marseilleTurn", type: "bool" },
+  { csv: "GKHighPunt", json: "gkHighPunt", type: "bool" },
+  { csv: "HiddenPlayer", json: "hiddenPlayer", type: "bool" },
+  { csv: "HeadingSpecialist", json: "headingSpecialist", type: "bool" },
+  { csv: "OutsideCurler", json: "outsideCurler", type: "bool" },
+  { csv: "PhenomenalFinishing", json: "phenomenalFinishing", type: "bool" },
+  { csv: "Captaincy", json: "captaincy", type: "bool" },
+  { csv: "Gamesmanship", json: "gamesmanship", type: "bool" },
+  { csv: "GKLowPunt", json: "gkLowPunt", type: "bool" },
+  { csv: "Trickster", json: "trickster", type: "bool" },
+  { csv: "LowLoftedPass", json: "lowLoftedPass", type: "bool" },
+  { csv: "ThroughPassing", json: "throughPassing", type: "bool" },
+  { csv: "FightingSpirit", json: "fightingSpirit", type: "bool" },
+
+  // Position values
+  { csv: "GK", json: "GK", type: "float", from: 0, to: 2 },
+  { csv: "LB", json: "LB", type: "float", from: 0, to: 2 },
+  { csv: "CB", json: "CB", type: "float", from: 0, to: 2 },
+  { csv: "RB", json: "RB", type: "float", from: 0, to: 2 },
+  { csv: "DMF", json: "DMF", type: "float", from: 0, to: 2 },
+  { csv: "CMF", json: "CMF", type: "float", from: 0, to: 2 },
+  { csv: "LMF", json: "LMF", type: "float", from: 0, to: 2 },
+  { csv: "RMF", json: "RMF", type: "float", from: 0, to: 2 },
+  { csv: "AMF", json: "AMF", type: "float", from: 0, to: 2 },
+  { csv: "LWF", json: "LWF", type: "float", from: 0, to: 2 },
+  { csv: "RWF", json: "RWF", type: "float", from: 0, to: 2 },
+  { csv: "SS", json: "SS", type: "float", from: 0, to: 2 },
+  { csv: "CF", json: "CF", type: "float", from: 0, to: 2 },
+
+  { csv: "tmid", json: "tmid", type: "int" },
+];
+
+const _team = {
+  name: "RCD Mallorca",
+  slug: "rcd-mallorca",
+};
+
+const player = {
+  name: "Player 1",
+  slug: "player-1",
+  attributes: {
+    age: 25,
+    height: 180,
+    weight: 80,
+    positionGroup: "MID",
+    position: "AMF",
+    role: "Creative Playmaker",
+    skills: ["OnetouchPass", "SoleControl", "LowLoftedPass"],
+    currentWage: 4000000,
+    expectedWage: 7000000,
+    value: 35000000,
+    marketValue: 25000000,
+    fatigue: 80,
+  },
+
+  lastMatches: [
+    {
+      homeTeam: "RCD Mallorca",
+      awayTeam: "Barcelona",
+      goals: 2,
+      yellowred: 0,
+      fatigue: 50,
+    },
+    {
+      homeTeam: "RCD Mallorca",
+      awayTeam: "Real Madrid",
+      goals: 1,
+      yellow: 1,
+      red: 0,
+      fatigue: 60,
+    },
+    {
+      homeTeam: "Athletic Bilbao",
+      awayTeam: "RCD Mallorca",
+      goals: 0,
+      yellow: 0,
+      red: 1,
+      fatigue: 70,
+    },
+    {
+      homeTeam: "Atletico Madrid",
+      awayTeam: "RCD Mallorca",
+      goals: 1,
+      yellowred: 0,
+      fatigue: 75,
+    },
+    {
+      homeTeam: "RCD Mallorca",
+      awayTeam: "Sevilla FC",
+      goals: 0,
+      yellow: 0,
+      red: 0,
+      fatigue: 80,
+    },
+  ],
+
+  stats: [
+    {
+      competition: "La Liga",
+      season: "2024-2025",
+      apps: 0,
+      goals: 0,
+      yellow: 0,
+      red: 0,
+    },
+    {
+      competition: "Copa  Del Rey",
+      season: "2024-2025",
+      apps: 0,
+      goals: 0,
+      yellow: 0,
+      red: 0,
+    },
+    {
+      competition: "Europa League",
+      season: "2024-2025",
+      apps: 0,
+      goals: 0,
+      yellow: 0,
+      red: 0,
+    },
+    {
+      competition: "Career",
+      season: "-",
+      apps: 0,
+      goals: 0,
+      yellow: 0,
+      red: 0,
+    },
+  ],
+
+  transfers: [
+    {
+      transferMoney: 30000000,
+      estimatedValue: 25000000,
+      wage: 10000000,
+      transferType: "PRS",
+      season: "2024-2025",
+      toTeam: "RCD Mallorca",
+    },
+    {
+      transferMoney: 35000000,
+      estimatedValue: 30000000,
+      wage: 12000000,
+      transferType: "TRS",
+      season: "2025-2026",
+      toTeam: "Real Madrid",
+    },
+    {
+      transferMoney: 40000000,
+      estimatedValue: 35000000,
+      wage: 15000000,
+      transferType: "PRO",
+      season: "2026-2027",
+      toTeam: "Atletico Madrid",
+    },
+  ],
+};
+
+attributeConfig.forEach((config) => {
+  player.attributes[config.json] = 40 + Math.floor(Math.random() * 59);
+});
+const modelParams = {};
+const _alpineModel = `playerModel(${JSON.stringify(modelParams)})`;
+---
+
+<script>
+  window.playerModel = function (params) {
+    return {
+      init() {
+         },
+    };
+  };
+</script>
+
+<TenantUser>
+  <h1>Player</h1>
+
+  <div class="grid grid-cols-1 gap-2" x-data={_alpineModel}>
+
+    <Card>
+      <Operations player={player} />
+    </Card>
+    
+    <SummaryCard player={player} />
+
+    <PositionsCard player={player} />
+
+    <AttributesCard player={player} />
+
+    <Card>
+      <h3>Stats</h3>
+      <ChartStats chartId="playerStatsChart" player={player} />
+    </Card>
+
+    <Card>
+      <h3>OP Value</h3>
+      <ChartValue chartId="playerValueChart" player={player} />
+    </Card>
+
+    <Card>
+      <h3>Wage</h3>
+      <ChartWage chartId="playerWageChart" player={player} />
+    </Card>
+
+    <LastMatchesCard player={player} />
+    <StatsCard player={player} />
+    <TransferHistoryCard player={player} />
+  </div>
+</TenantUser>

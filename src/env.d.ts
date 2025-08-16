@@ -15,6 +15,7 @@ interface ImportMetaEnv {
 	readonly CROOTBALL_API_KEY: string;
 
 	readonly CONTENT_BASE_URL: string;
+	readonly PORTAL_URL: string;
 }
 
 interface ImportMeta {

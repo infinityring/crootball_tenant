@@ -1,0 +1,21 @@
+---
+import TenantTeam from "@/layouts/TenantTeam.astro";
+import StaffCard from "@/components/facilities/StaffCard.astro";
+import FacilitiesCard from "@/components/facilities/FacilitiesCard.astro";
+import OperationsHistoryCard from "@/components/facilities/OperationsHistoryCard.astro";
+
+const _team = {
+  name: "RCD Mallorca",
+  slug: "rcd-mallorca",
+};
+---
+
+<TenantTeam>
+  <h1>Team {_team.name} Facilities</h1>
+  <div class="flex flex-col space-y-4">
+  <a class="btn bg-primary text-white" href={`/teams/${_team.slug}/facilities/shop`}>Shop</a> 
+    <FacilitiesCard />  
+    <StaffCard />
+    <OperationsHistoryCard />
+  </div>
+</TenantTeam>
